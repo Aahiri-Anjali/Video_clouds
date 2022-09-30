@@ -20,7 +20,4 @@ class UserController extends Controller
        $data = $this->userRepository->getUserinfo();
        return view('user.userdetail',compact('data'));
     }
-
-
-
 }
