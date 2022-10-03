@@ -168,8 +168,9 @@
     
 
         $('.close,#close,#editclose').click(function() {
-            $('span').text('');
-            $('#myModal').hide();
+            $("#video_insert_form")[0].reset();
+            $(".error_danger").text('');
+            // $('#myModal').hide();
         });
 
         $.ajaxSetup({
@@ -179,11 +180,15 @@
         });
 
         $('#btn').click(function(){
+             $("#video_insert_form")[0].reset();
+             $('#editid').val('');
              $('video').hide();
              $(".edit_video_div").html(''); 
+             $(".error_danger").text('');
         });
 
         $(document).on('click','#add_video',function(e){
+            console.log('in add');
             e.preventDefault();
             var id = $('#editid').val();
             var upload_type = $('input[type="radio"]:checked').val();

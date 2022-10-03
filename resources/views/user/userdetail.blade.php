@@ -5,7 +5,7 @@
             <form class="form-horizontal" action="">
                 <div class="card-body">
                 <h4 class="card-title">Personal Info</h4>
-                <div class="form-group row">
+                <div class="form-group row">                
                     {{-- <img for="image"  class="rounded-circle" src="{{$data->image}}" height="20" width="50"> --}}
                 </div>
                 <div class="form-group row">

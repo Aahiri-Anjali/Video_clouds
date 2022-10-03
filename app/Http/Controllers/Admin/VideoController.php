@@ -92,7 +92,16 @@ class VideoController extends Controller
                 $file->move(public_path() . '/upload/', $filename); 
                 $extension = $file->getClientOriginalExtension();
                 array_push($files, $filename);                                
-            }    
+            }  
+            
+            $array1 = array('jpg','jpeg','png');
+            if(empty($upload) && $request['upload_type'] == "upload_image")
+            {
+                if(!in_array($extension,$array1))
+                {
+                    return response()->json(['status'=>422,'data'=>'Upload Valid images']);
+                }       
+            }
         } 
         else 
         {
@@ -111,7 +120,7 @@ class VideoController extends Controller
             }
 
         }
-
+        
         $video = Video::updateOrCreate(
             ['id' => $request->video_id],
             ['title'=>$request['title'],
@@ -127,13 +136,9 @@ class VideoController extends Controller
             'slug'=>Str::slug($request['title'], "-"),
         ]);
 
-        $array1 = array('jpg','jpeg','png');
+        
         if($video && $request->upload_type == "upload_image")
-        {   
-            if(!in_array($extension,$array1))
-            {
-                return response()->json(['status'=>422,'data'=>'Upload Valid images']);
-            }           
+        {                 
             foreach($files as $f)
             {
                 $images = new Image();
