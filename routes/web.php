@@ -21,7 +21,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
 
 Route::get('/userdetail',[UserController::class,'userInfo'])->name('userInfo');
-
+Route::post('/userdetail',[UserController::class,'userInfoUpdate'])->name('userInfoUpdate');
+Route::get('/changepassword',[UserController::class,'changePassword'])->name('changePassword');
+Route::post('/changepassword',[UserController::class,'submitChangePassword'])->name('submitChangePassword');
+Route::get('/categoryVideo/{id}',[UserController::class,'categoryWiseVideo'])->name('categoryWiseVideo');

@@ -121,6 +121,8 @@ class VideoController extends Controller
 
         }
         
+
+        
         $video = Video::updateOrCreate(
             ['id' => $request->video_id],
             ['title'=>$request['title'],

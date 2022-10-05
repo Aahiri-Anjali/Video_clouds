@@ -18,8 +18,9 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/css/toastr.css" rel="stylesheet" />
+    @stack('link')
   <style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;padding: 5px;border: 1px solid white;z-index: 10000;}.jqsfield { color: white;font: 10px arial, san serif;text-align: left;}</style></head>
-
   <body>
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
@@ -90,19 +91,24 @@
               <!-- ============================================================== -->
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <span class="d-none d-md-block">Create New <i class="fa fa-angle-down"></i></span>
+                  <span class="d-none d-md-block">Choose Category <i class="fa fa-angle-down"></i></span>
                   <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                  </li>
+                  @foreach($categories as $category)
+                  @if($category->status == '1')
+                  <li><a class="dropdown-item" href="{{route('categoryWiseVideo',['id'=>$category->id])}}">{{$category->name}}</a></li>
+                  @endif
+                  @endforeach
                 </ul>
               </li>
-              <!-- ============================================================== -->
+              {{-- <li class="nav-item dropdown">
+                <a class="nav-link" href="{{route('changePassword')}}" id="navbarDropdown" role="button">
+                  <span class="d-none d-md-block">Change Password</span>
+                  <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>
+                </a>
+              </li> --}}
+                          <!-- ============================================================== -->
               <!-- Search -->
               <!-- ============================================================== -->
               <li class="nav-item search-box">
@@ -230,16 +236,8 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">               
                   <a class="dropdown-item" href="{{route('userInfo')}}"><i class="mdi mdi-account me-1 ms-1"></i> My Profile</a>
-                  {{-- <a class="dropdown-item" href="javascript:void(0)"><i class="mdi mdi-wallet me-1 ms-1"></i> My First Name:{{$data->first_name}} </a>
-                  <a class="dropdown-item" href="javascript:void(0)"><i class="mdi mdi-wallet me-1 ms-1"></i> My Last Name:{{$data->last_name}} </a>
-                  <a class="dropdown-item" href="javascript:void(0)"><i class=" fas fa-comment-dots"></i> Email:{{$data->email}} </a>
-                  <a class="dropdown-item" href="javascript:void(0)"><i class="fas fa-address-book"></i> Mobile :{{$data->mobile}} </a>
-                  <a class="dropdown-item" href="javascript:void(0)"><i class="fas fa-address-book"></i> Country:{{$data->country}} </a>
-                  <a class="dropdown-item" href="javascript:void(0)"><i class="fas fa-address-book"></i> State:{{$data->state}} </a>
-                  <a class="dropdown-item" href="javascript:void(0)"><i class="fas fa-address-book"></i> City:{{$data->city}} </a>
-                  <a class="dropdown-item" href="javascript:void(0)"><i class="fas fa-address-book"></i> Address:{{$data->address}} </a>
-                  <a class="dropdown-item" href="javascript:void(0)"><i class="mdi mdi-email me-1 ms-1"></i>Inbox</a> --}}
                   <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{{route('changePassword')}}"><i class="mdi mdi-account me-1 ms-1"></i> Change Password</a>
                   <div class="dropdown-divider"></div>
 
                   <a class="dropdown-item" href="{{ route('logout') }}"
@@ -276,11 +274,9 @@
           <nav class="sidebar-nav">
             <ul id="sidebarnav" class="pt-4 in">
               <li class="sidebar-item selected">
-                <a class="sidebar-link waves-effect waves-dark sidebar-link active" href="index.html" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a>
+                <a class="sidebar-link waves-effect waves-dark sidebar-link active" href="{{route('dashboard')}}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a>
               </li>
-              <li class="sidebar-item">
-                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="charts.html" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Charts</span></a>
-              </li>
+             
               <li class="sidebar-item">
                 <a class="sidebar-link waves-effect waves-dark sidebar-link" href="widgets.html" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Widgets</span></a>
               </li>
@@ -315,7 +311,6 @@
         <div class="page-breadcrumb">
           <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
-              <h4 class="page-title">Dashboard Page</h4>
               <div class="ms-auto text-end">
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
@@ -363,6 +358,8 @@
     <!-- All Jquery -->
     <!-- ============================================================== -->
     <!-- JavaScript Bundle with Popper -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
     <script src="{{asset('front_assets/assets/libs/jquery/dist/jquery.min.js')}}"></script>
     <!-- Bootstrap tether Core JavaScript -->
@@ -386,4 +383,5 @@
     <script src="{{asset('front_assets/assets/libs/flot/jquery.flot.crosshair.js')}}"></script>
     <script src="{{asset('front_assets/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js')}}"></script>
     <script src="{{asset('front_assets/dist/js/pages/chart/chart-page-init.js')}}"></script>
+    @stack('js')
 <div class="flotTip" style="position: absolute; left: 1028px; top: 617.013px; display: none;"></div></body></html>

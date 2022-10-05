@@ -1,66 +1,29 @@
 {{-- @extends('layouts.app') --}}
 @extends('layouts.front_main')
 
+@push('link')
+<style type="text/css">
+/* #video_list{
+    margin-left: "200px";
+} */
+</style>
+@endpush
 @section('content')
-        <div class="card">
-            <form class="form-horizontal">
-                <div class="card-body">
-                <h4 class="card-title">Personal Info</h4>
-                <div class="form-group row">
-                    <img for="image"  class="rounded-circle" src="{{$data->image}}" height="20" width="50">
-                </div>
-                <div class="form-group row">
-                    <label for="fname" class="col-sm-3 text-end control-label col-form-label">First Name</label>
-                    <div class="col-sm-9">
-                    <input type="text" class="form-control" id="fname" placeholder="First Name Here" value="{{$data->first_name}}">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="lname" class="col-sm-3 text-end control-label col-form-label">Last Name</label>
-                    <div class="col-sm-9">
-                        {{-- {{$data->last_name}} --}}
-                    </div>
-                </div>
-                 <div class="form-group row">
-                    <label for="cono1" class="col-sm-3 text-end control-label col-form-label">Email Id</label>
-                    <div class="col-sm-9">
-                        {{-- {{$data->email}} --}}
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="lname" class="col-sm-3 text-end control-label col-form-label">Mobile No.</label>
-                    <div class="col-sm-9">
-                        {{-- {{$data->mobile}} --}}
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="lname" class="col-sm-3 text-end control-label col-form-label">State</label>
-                    <div class="col-sm-9">
-                        {{-- {{$data->state}} --}}
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="lname" class="col-sm-3 text-end control-label col-form-label">City</label>
-                    <div class="col-sm-9">
-                        {{-- {{$data->city}} --}}
-                    </div>
-                </div>              
-                <div class="form-group row">
-                    <label for="email1" class="col-sm-3 text-end control-label col-form-label">Address</label>
-                    <div class="col-sm-9">
-                        {{-- {{$data->address}} --}}
-                    </div>
-                </div>           
-                </div>
-                <div class="border-top">
-                <div class="card-body">
-                    <button type="button" class="btn btn-primary">
-                    Submit
-                    </button>
-                </div>
-                </div>
-            </form>
+
+    <div class="row mb-7">
+        <div class="col-lg-7">
+            <video height="500" width="700" controls><source src="{{$lastvideo->video}}" type="video/mp4" /></video>    
+        </div>  
+        <div class="col-lg-5">
+            @foreach($videos as $video)
+            <video height="300" width="500" controls><source src="{{$video->video}}" type="video/mp4" /></video>  
+            @endforeach        
         </div>
+    </div>  
+
+    
+
+
 @endsection
 
 
