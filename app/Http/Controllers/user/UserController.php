@@ -25,7 +25,8 @@ class UserController extends Controller
     public function userInfo()
     {
        $data = $this->userRepository->getUserinfo();
-       return view('user.userdetail',compact('data'));
+       $categories = Category::all();
+       return view('user.userdetail',compact('data','categories'));
     }
 
     public function userInfoUpdate(UserUpdateRequest $request)
@@ -62,7 +63,8 @@ class UserController extends Controller
     public function changePassword()
     {
         $data = $this->userRepository->getUserinfo();
-        return view('user.changepassword',compact('data'));
+        $categories = Category::all();
+        return view('user.changepassword',compact('data','categories'));
     }
 
     public function submitChangePassword(ChangePasswordRequest $request)
