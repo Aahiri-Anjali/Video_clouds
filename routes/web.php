@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\user\UserController;
+use App\Http\Controllers\user\CommentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,3 +29,5 @@ Route::post('/userdetail',[UserController::class,'userInfoUpdate'])->name('userI
 Route::get('/changepassword',[UserController::class,'changePassword'])->name('changePassword');
 Route::post('/changepassword',[UserController::class,'submitChangePassword'])->name('submitChangePassword');
 Route::get('/categoryVideo/{id}',[UserController::class,'categoryWiseVideo'])->name('categoryWiseVideo');
+Route::get('/videodetails/{id}',[UserController::class,'videoDetails'])->name('videoDetails');
+Route::post('/comments',[CommentController::class,'comments'])->name('comments');

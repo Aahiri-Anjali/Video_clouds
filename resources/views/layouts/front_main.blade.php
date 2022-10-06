@@ -8,6 +8,7 @@
     <meta name="keywords" content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Matrix lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Matrix admin lite design, Matrix admin lite dashboard bootstrap 5 dashboard template">
     <meta name="description" content="Matrix Admin Lite Free Version is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Video Clouds</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('front_assets/assets/images/favicon.png')}}">

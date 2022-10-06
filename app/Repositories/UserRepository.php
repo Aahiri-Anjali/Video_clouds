@@ -24,4 +24,9 @@ class UserRepository implements UserRepositoryInterface
         return Video::where('upload_type','upload_video')->where('category_id',$id)->latest()->first();
     }
 
+    public function getvideoDetails($id)
+    {
+        return Video::where('upload_type','upload_video')->where('id',$id)->first();
+    }
+
 }

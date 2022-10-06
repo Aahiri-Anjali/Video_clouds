@@ -94,10 +94,21 @@ class UserController extends Controller
     public function categoryWiseVideo($id)
     {
         $data = $this->userRepository->getUserinfo();
-        $videos = $this->userRepository->getCategoryWiseVideo($id);
-        $lastvideo = $this->userRepository->getLastVideo($id);
         $categories = Category::all();
+        // $category = Category::find('id',$id);
+        $videos = $this->userRepository->getCategoryWiseVideo($id);
+        $lastvideo = $this->userRepository->getLastVideo($id);   
         return view('user.categorywisevideo',compact('videos','data','categories','lastvideo'));
+    }
+
+    public function videoDetails($id)
+    {
+        $data = $this->userRepository->getUserinfo();
+        $categories = Category::all();
+        $video = $this->userRepository->getvideoDetails($id);
+        // $category_id = $video->category_id;
+        // $category = Category::find('id',$category_id);
+        return view('user.videodetails',compact('video','data','categories'));
     }
 
 }
