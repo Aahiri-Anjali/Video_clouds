@@ -2,6 +2,7 @@
 
 @push('link')
 <link href="{{asset('css/user/videodetail.css')}}" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet">
 @endpush
 @section('content')
 <div class="row mb-7">
@@ -88,7 +89,7 @@
                           src="{{$data->image}}" alt="avatar" width="60"
                           height="60" />
                         <div>
-                          <h6 class="fw-bold text-primary mb-1">Lily Coleman</h6>
+                          <h6 class="fw-bold text-primary mb-1">{{$data->first_name}} {{$data->last_name}}</h6>
                           <p class="text-muted small mb-0">
                             Shared publicly - Jan 2020
                           </p>
@@ -102,9 +103,32 @@
                       </p>
           
                       <div class="small d-flex justify-content-start">
+                        <a class="d-flex align-items-center me-3">
+                          @if(isset($like->video_id) && isset($like->user_id))
+                          @if($like->video_status == 'like')
+                            <i class="fa-solid fa-thumbs-up" id="like"></i>
+                          @else
+                            <i class="like fa-regular fa-thumbs-up" id="like"></i>
+                          @endif
+                          @else
+                          <i class="like fa-regular fa-thumbs-up" id="like"></i>
+                          @endif
+                          <p class="mb-0">Like</p>&nbsp;&nbsp;
+                          <span class="mb-0" id="countlikes"></span>
+                        </a>
+
                         <a href="#!" class="d-flex align-items-center me-3">
-                          <i class="far fa-thumbs-up me-2"></i>
-                          <p class="mb-0">Like</p>
+                          @if(isset($like->video_id) && isset($like->user_id))
+                          @if($like->video_status == 'dislike')
+                            <i class="fa-solid fa-thumbs-down" id="dislike"></i>
+                          @else
+                            <i class="dislike fa-regular fa-thumbs-down" id="dislike"></i>
+                          @endif
+                          @else
+                          <i class="dislike fa-regular fa-thumbs-down" id="dislike"></i>
+                          @endif
+                          <p class="mb-0">Dislike</p>&nbsp;&nbsp;
+                          <span class="mb-0" id="countdislikes"></span>
                         </a>
                         <a href="#!" class="d-flex align-items-center me-3">
                           <i class="far fa-comment-dots me-2"></i>
@@ -116,6 +140,7 @@
                         </a>
                       </div>
                     </div>
+                    <form>
                     <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
                       <div class="d-flex flex-start w-100">
                         <input type="hidden" id="userid" value="{{$data->id}}">
@@ -124,17 +149,21 @@
                           src="{{$data->image}}" alt="avatar" width="40"
                           height="40" />
                         <div class="form-outline w-100">
-                            <label class="form-label" for="textAreaExample">Message</label>
-                          <textarea class="form-control" id="textarea" rows="4"
+                            <label class="form-label" for="textAreaExample">{{$data->first_name}} {{$data->last_name}}</label>
+                          <textarea class="form-control" id="textarea" rows="4" name="comment"
                             style="background: #fff;" placeholder="Enter Comment"></textarea>
+                            <span class="text-danger error_danger" id="commenterror"></span>
+
                         </div>
                       </div>
-                        <button type="button" id="comment" class="btn btn-primary btn-sm">Post comment</button>
+                        <button type="submit" id="comment" class="btn btn-primary btn-sm">Post comment</button>
                         <button type="button" class="btn btn-outline-primary btn-sm">Cancel</button>
                     </div>
+                    </form>  
                   </div>
                 </div>
               </div>
+              <div id="showcomments"></div> 
         </div>
     </div>
     </div>
@@ -145,19 +174,23 @@
 @push('js')
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> --}}
 <script>
-    $(document).ready(function(e){
-        // e.preventDefault();
+$(document).ready(function(){
+      commentsall();
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        $('#comment').click(function(){
-            console.log('comment clicked');
+        countlikes();
+        countdislikes();
+
+        $(document).on('click','#comment',function(e){
+            e.preventDefault();
             var comment = $('#textarea').val();
             var userid = $('#userid').val();
             var videoid= $('#videoid').val();
-            console.log(videoid);
+            $('#commenterror').text('');
+            $(document).find('.error_danger').text('');
             $.ajax({
                 url:"{{route('comments')}}",
                 type:"post",
@@ -167,18 +200,136 @@
                     userid:userid,
                     videoid:videoid,
                 },
-                success:function(){
-
-                    // toastr.options.timeOut = 10000;
-                    // @if (Session::has('error'))
-                    //         toastr.error('{{ Session::get('error') }}');
-                    // @elseif(Session::has('success'))
-                    //     toastr.success('{{ Session::get('success') }}');
-                    // @endif
-
-                }
+                beforeSend:function() {
+                      $(document).find('.error_danger').text('');
+                    },
+                success:function(response){
+                    $('#commenterror').text('');
+                    console.log(response.success);
+                    if(response.status == 200)
+                    {
+                      $('#textarea').val('');
+                      toastr.success(response.success); 
+                      commentsall();             
+                    }
+                },
+                error:function(response){
+                    $.each(response.responseJSON.errors, function(key,value)
+                    {
+                        $('#commenterror').text(value);
+                    });
+                },
             });
         });
-    });
+
+        function commentsall()
+        {
+          var videoid= $('#videoid').val();
+              $.ajax({
+                    url:"{{route('showComments')}}",
+                    type:"get",
+                    dataType:"json",
+                    data:{videoid:videoid},
+                    success:function(response){
+                      console.log(response.data);
+                      if(response.status == 200)
+                      {
+                        $('#showcomments').html('');
+                        $.each(response.data, function(key,value)
+                        {
+                          $('#showcomments').append('<div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">\
+                            <div class="d-flex flex-start w-100">\
+                            <img class="rounded-circle shadow-1-strong me-3" src="{{$data->image}}" alt="avatar" width="40" height="40" />\
+                            <div class="form-outline w-100">\
+                                <label class="form-label" for="textAreaExample">{{$data->first_name}} {{$data->last_name}}</label>\
+                              <textarea class="form-control show" rows="4" name="comment"\
+                                style="background: #fff;" placeholder="Enter Comment">'+value.comment+'</textarea>\
+                            </div>\
+                          </div>\
+                          </div>');
+                        });    
+                    }
+                  },
+                });
+        }
+
+        $(document).on('click','.like',function(){
+              var userid = $('#userid').val();
+              var videoid= $('#videoid').val();
+              $.ajax({
+                url:"{{route('like')}}",
+                type:"post",
+                dataType:"json",
+                data:{userid:userid,
+                      videoid:videoid,
+                },
+                success:function(response){
+                  if(response.status == 200)
+                  {
+                    toastr.success(response.success); 
+                    countlikes();
+                    countdislikes();
+                    $('.like').attr('class','fa-solid fa-thumbs-up');
+                    $('#dislike').attr('class','dislike fa-regular fa-thumbs-down');
+                  }
+                },
+              });
+        });
+
+        $(document).on('click','.dislike',function(){
+              var userid = $('#userid').val();
+              var videoid= $('#videoid').val();
+              $.ajax({
+                url:"{{route('dislike')}}",
+                type:"post",
+                dataType:"json",
+                data:{userid:userid,videoid:videoid},
+                success:function(response){
+                  if(response.status == 200)
+                  {
+                    toastr.error(response.success); 
+                    countlikes();
+                    countdislikes();
+                    $('.dislike').attr('class','fa-solid fa-thumbs-down');
+                    $('#like').attr('class','like fa-regular fa-thumbs-up');
+                  }
+                }
+              });
+        });
+
+        function countlikes()
+        {
+            var videoid= $('#videoid').val();
+            $.ajax({
+              url:"{{route('countLikes')}}",
+              type:"post",
+              dataType:"json",
+              data:{videoid:videoid},
+              success:function(response){
+                if(response.status == 200)
+                {
+                  $('#countlikes').text(response.data);
+                }
+              },
+            });
+        }
+
+        function countdislikes()
+        {
+            var videoid= $('#videoid').val();
+            $.ajax({
+              url:"{{route('countDislikes')}}",
+              type:"post",
+              dataType:"json",
+              data:{videoid:videoid},
+              success:function(response){
+                if(response.status == 200)
+                {
+                  $('#countdislikes').text(response.data);
+                }
+              }
+            });
+        }
+});
 </script>
 @endpush

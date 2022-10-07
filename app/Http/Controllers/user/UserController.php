@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Like;
+
 
 
 class UserController extends Controller
@@ -105,10 +107,11 @@ class UserController extends Controller
     {
         $data = $this->userRepository->getUserinfo();
         $categories = Category::all();
+        $like = Like::where('video_id',$id)->where('user_id',$data->id)->first();
         $video = $this->userRepository->getvideoDetails($id);
         // $category_id = $video->category_id;
         // $category = Category::find('id',$category_id);
-        return view('user.videodetails',compact('video','data','categories'));
+        return view('user.videodetails',compact('video','data','categories','like'));
     }
 
 }

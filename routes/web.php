@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\user\UserController;
 use App\Http\Controllers\user\CommentController;
+use App\Http\Controllers\user\LikeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,3 +32,8 @@ Route::post('/changepassword',[UserController::class,'submitChangePassword'])->n
 Route::get('/categoryVideo/{id}',[UserController::class,'categoryWiseVideo'])->name('categoryWiseVideo');
 Route::get('/videodetails/{id}',[UserController::class,'videoDetails'])->name('videoDetails');
 Route::post('/comments',[CommentController::class,'comments'])->name('comments');
+Route::get('/commentsall',[CommentController::class,'showComments'])->name('showComments');
+Route::post('/like',[LikeController::class,'like'])->name('like');
+Route::post('/dislike',[LikeController::class,'dislike'])->name('dislike');
+Route::post('/countlikes',[LikeController::class,'countLikes'])->name('countLikes');
+Route::post('/countdislikes',[LikeController::class,'countDislikes'])->name('countDislikes');
