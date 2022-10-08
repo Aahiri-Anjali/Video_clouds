@@ -108,8 +108,8 @@
         </div>
         <div class="row g-2">
             @foreach($videos as $video)
-          <div class="col mb-2">
-            <video height="300" width="500" controls><source src="{{$video->video}}" type="video/mp4" /></video>  
+            <div class="col mb-2">
+              <video height="300" width="500" controls><source src="{{$video->video}}" type="video/mp4" /></video>  
             </div>
           @endforeach   
         </div>

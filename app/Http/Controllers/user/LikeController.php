@@ -43,4 +43,20 @@ class LikeController extends Controller
         $countdislikes = count($dislikes);
         return response()->json(['status'=>200,'data'=>$countdislikes]);
     }
+
+    public function removeLike(Request $request)
+    {
+        if($request->video_status == "like")
+        {
+            $removelike = Like::where('video_id',$request->videoid)->where('user_id',$request->userid)->where('video_status','like')->first();
+            $deletelike = $removelike->delete();
+        }
+        if($request->video_status == "dislike")
+        {
+            $removedislike = Like::where('video_id',$request->videoid)->where('user_id',$request->userid)->where('video_status','dislike')->first();
+            $deletedislike = $removedislike->delete();
+        }
+        
+        return response()->json(['status'=>200,'data'=>'removed']);
+    }
 }

@@ -106,7 +106,7 @@
                         <a class="d-flex align-items-center me-3">
                           @if(isset($like->video_id) && isset($like->user_id))
                           @if($like->video_status == 'like')
-                            <i class="fa-solid fa-thumbs-up" id="like"></i>
+                            <i class="solid_like fa-solid fa-thumbs-up" id="like"></i>
                           @else
                             <i class="like fa-regular fa-thumbs-up" id="like"></i>
                           @endif
@@ -120,7 +120,7 @@
                         <a href="#!" class="d-flex align-items-center me-3">
                           @if(isset($like->video_id) && isset($like->user_id))
                           @if($like->video_status == 'dislike')
-                            <i class="fa-solid fa-thumbs-down" id="dislike"></i>
+                            <i class="solid_dislike fa-solid fa-thumbs-down" id="dislike"></i>
                           @else
                             <i class="dislike fa-regular fa-thumbs-down" id="dislike"></i>
                           @endif
@@ -163,6 +163,7 @@
                   </div>
                 </div>
               </div>
+              <div id="showusercomments"></div> 
               <div id="showcomments"></div> 
         </div>
     </div>
@@ -225,33 +226,74 @@ $(document).ready(function(){
         function commentsall()
         {
           var videoid= $('#videoid').val();
+          var userid = $('#userid').val();
               $.ajax({
                     url:"{{route('showComments')}}",
                     type:"get",
                     dataType:"json",
-                    data:{videoid:videoid},
+                    data:{videoid:videoid,
+                          userid:userid},
                     success:function(response){
-                      console.log(response.data);
                       if(response.status == 200)
                       {
                         $('#showcomments').html('');
-                        $.each(response.data, function(key,value)
-                        {
-                          $('#showcomments').append('<div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">\
-                            <div class="d-flex flex-start w-100">\
-                            <img class="rounded-circle shadow-1-strong me-3" src="{{$data->image}}" alt="avatar" width="40" height="40" />\
-                            <div class="form-outline w-100">\
-                                <label class="form-label" for="textAreaExample">{{$data->first_name}} {{$data->last_name}}</label>\
-                              <textarea class="form-control show" rows="4" name="comment"\
-                                style="background: #fff;" placeholder="Enter Comment">'+value.comment+'</textarea>\
+                        $('#showusercomments').html('');
+                          if(userid == response.loggedid)
+                          {
+                            $.each(response.usercomments, function(key,value)
+                            {     
+                              $('#showusercomments').append('<div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">\
+                                <div class="d-flex flex-start w-100">\
+                                <img class="rounded-circle shadow-1-strong me-3" id="user_image" src="'+value.user.image+'" alt="avatar" width="40" height="40" />\
+                                <div class="form-outline w-100">\
+                                    <label class="form-label">'+value.user.first_name+' '+value.user.last_name+'</label>\
+                                  <input type="text" id="comment_'+value.id+'" class="usercomment form-control show" value="'+value.comment+'" name="comment"\
+                                    style="background: #fff;" placeholder="Enter Comment">\
+                                </div>\
+                              </div>\
+                                  <button type="button" id="updateuser" value-id="'+value.id+'" value-comment="'+value.comment+'" class="btn btn-primary btn-sm">Update</button>\
+                              </div>\
+                              </div>\
+                              </div>');
+                            });
+                          }         
+                          $.each(response.users, function(key,value)
+                          {     
+                            $('#showcomments').append('<div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">\
+                              <div class="d-flex flex-start w-100">\
+                              <img class="rounded-circle shadow-1-strong me-3" id="user_image" src="'+value.user.image+'" alt="avatar" width="40" height="40" />\
+                              <div class="form-outline w-100">\
+                                  <label class="form-label" for="textAreaExample">'+value.user.first_name+' '+value.user.last_name+'</label>\
+                                <label class="form-control show" name="comment"\
+                                  style="background: #fff;" placeholder="Enter Comment">'+value.comment+'</label>\
+                              </div>\
                             </div>\
-                          </div>\
-                          </div>');
-                        });    
+                            </div>');
+                          });                        
                     }
                   },
                 });
         }
+
+        $(document).on('click','#updateuser',function(){
+            var commentid = $(this).attr('value-id');
+            console.log(commentid);
+            var comment = $('#comment_'+commentid).val();
+            console.log(comment);   
+              $.ajax({
+                url:"{{route('updateComment')}}",
+                type:"post",
+                dataType:"json",
+                data:{commentid:commentid,
+                      comment:comment},
+                success:function(response){
+                  if(response.status == 200)
+                  {
+                    commentsall();
+                  }
+                }
+              });
+        });
 
         $(document).on('click','.like',function(){
               var userid = $('#userid').val();
@@ -269,7 +311,7 @@ $(document).ready(function(){
                     toastr.success(response.success); 
                     countlikes();
                     countdislikes();
-                    $('.like').attr('class','fa-solid fa-thumbs-up');
+                    $('.like').attr('class','solid_like fa-solid fa-thumbs-up');
                     $('#dislike').attr('class','dislike fa-regular fa-thumbs-down');
                   }
                 },
@@ -290,7 +332,7 @@ $(document).ready(function(){
                     toastr.error(response.success); 
                     countlikes();
                     countdislikes();
-                    $('.dislike').attr('class','fa-solid fa-thumbs-down');
+                    $('.dislike').attr('class','solid_dislike fa-solid fa-thumbs-down');
                     $('#like').attr('class','like fa-regular fa-thumbs-up');
                   }
                 }
@@ -330,6 +372,50 @@ $(document).ready(function(){
               }
             });
         }
+
+        $(document).on('click','.solid_like',function(){
+            var userid = $('#userid').val();
+            var videoid= $('#videoid').val();
+            var video_status = "like";
+            $.ajax({
+              url:"{{route('removeLike')}}",
+              type:"post",
+              dataType:"json",
+              data:{userid:userid,
+                    videoid:videoid,
+                    video_status:video_status,},
+              success:function(response){
+                if(response.status == 200)
+                {
+                  countlikes();
+                  countdislikes();
+                  $('#like').attr('class','like fa-regular fa-thumbs-up');
+                }
+              }
+            });
+        });
+
+        $(document).on('click','.solid_dislike',function(){
+          var userid = $('#userid').val();
+          var videoid= $('#videoid').val();
+          var video_status = "dislike";
+          $.ajax({
+              url:"{{route('removeLike')}}",
+              type:"post",
+              dataType:"json",
+              data:{userid:userid,
+                    videoid:videoid,
+                    video_status:video_status},
+              success:function(response){
+                if(response.status == 200)
+                {
+                  countlikes();
+                  countdislikes();
+                  $('#dislike').attr('class','dislike fa-regular fa-thumbs-down');
+                }
+              }
+            });
+        });
 });
 </script>
 @endpush

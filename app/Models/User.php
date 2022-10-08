@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\User;
 
 class User extends Authenticatable
 {
@@ -57,4 +58,9 @@ class User extends Authenticatable
             return asset('/upload/'.$value);
         } 
     } 
+
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
