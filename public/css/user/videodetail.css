@@ -122,7 +122,7 @@
       display:flex;
       position:relative;
 } */
-.arc span{
+/* .arc span{
     height:1000px;
     width:2200px;
     background-image: linear-gradient(to bottom,#B8550F,#626262);
@@ -131,7 +131,7 @@
     right:-135px;
     top:-590px;
   
-}
+} */
 .about{
     margin-top : 200px;
     padding:10px 20px;

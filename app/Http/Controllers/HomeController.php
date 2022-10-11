@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Interfaces\UserRepositoryInterface;
 use App\Models\Video;
 use App\Models\Category;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -39,8 +40,17 @@ class HomeController extends Controller
     {
         $data = $this->userRepository->getUserinfo();
         $categories = Category::all();
+        $latestcategories =[];
+        foreach($categories as $category)
+        {       
+            $latest = $videos = Video::where('upload_type','upload_video')->where('category_id',$category->id)->with('category')->latest()->take(3)->get();
+            $latestId = array_push($latestcategories,$latest);
+        }
+        // dd($latestcategories);
+
         $lastvideo = Video::where('upload_type','upload_video')->latest()->first();
-        $videos = Video::where('upload_type','upload_video')->get();
-        return view('home',compact('data','lastvideo','videos','categories'));
+        $lastvideos = Video::where('upload_type','upload_video')->latest()->take(3)->get();
+        $videos = Video::where('upload_type','upload_video')->select('category_id', DB::raw('count(*) as total'))->groupBy('category_id')->get();
+        return view('home',compact('data','lastvideo','lastvideos','videos','categories','latestcategories'));
     }
 }

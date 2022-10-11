@@ -15,4 +15,5 @@ class Category extends Model
     {
         return $this->hasOne(Video::class,'category_id','id');
     }
+
 }

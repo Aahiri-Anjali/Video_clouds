@@ -18,7 +18,7 @@
             <i class="fa fa-envelope-o"></i>
         </div>
         <div class="image">
-            <span><video height="500" width="700" controls><source src="{{$video->video}}" type="video/mp4" /></video></span>
+            <span><video height="500" width="900" controls><source src="{{$video->video}}" type="video/mp4" /></video></span>
         </div>
         <div class="arc">
             <span></span>
@@ -27,7 +27,7 @@
             <div class="row">
             <center><p><h3><u>Video Details</u></h3></p></center>
             <div class="col-sm-3">
-                <p class="mb-0">Video Title</p>
+                <p class="mb-0">Video Title <i class="fa-brands fa-cuttlefish"></i></p>
               </div>
               <div class="col-sm-9">
                 <p class="text-muted mb-0">{{$video->title}}</p>
@@ -36,16 +36,16 @@
             <hr>
             <div class="row">
                 <div class="col-sm-3">
-                  <p class="mb-0">Upload Type</p>
+                  <p class="mb-0">Publish Date <i class="fa-solid fa-calendar-days"></i></p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{$video->upload_type}}</p>
+                  <p class="text-muted mb-0">{{$video->published_at}}</p>
                 </div>
               </div>
               <hr>
               <div class="row">
                 <div class="col-sm-3">
-                  <p class="mb-0">Video Link</p>
+                  <p class="mb-0">Video Link <i class="fa-solid fa-link"></i></p>
                 </div>
                 <div class="col-sm-9">
                   <p class="text-muted mb-0">{{$video->link}}</p>
@@ -54,7 +54,7 @@
               <hr>
               <div class="row">
                   <div class="col-sm-3">
-                    <p class="mb-0">Video Description</p>
+                    <p class="mb-0">Video Description <i class="fa-solid fa-audio-description"></i></p>
                   </div>
                   <div class="col-sm-9">
                     <p class="text-muted mb-0">{{$video->description}}</p>
@@ -63,7 +63,7 @@
                 <hr>
                 <div class="row">
                   <div class="col-sm-3">
-                    <p class="mb-0">Video Hashtag</p>
+                    <p class="mb-0">Video Hashtag <i class="fa-solid fa-hashtag"></i></p>
                   </div>
                   <div class="col-sm-9">
                     <p class="text-muted mb-0">{{$video->hashtags}}</p>

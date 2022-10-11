@@ -9,6 +9,11 @@
     <meta name="description" content="Matrix Admin Lite Free Version is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <style>
+      /* .videoclouds{
+        font-color:white;
+      } */
+      </style>
     <title>Video Clouds</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('front_assets/assets/images/favicon.png')}}">
@@ -20,6 +25,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/css/toastr.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet">
     @stack('link')
   <style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;padding: 5px;border: 1px solid white;z-index: 10000;}.jqsfield { color: white;font: 10px arial, san serif;text-align: left;}</style></head>
   <body>
@@ -35,7 +41,7 @@
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
-    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full" data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="mini-sidebar" data-sidebar-position="absolute" data-header-position="absolute"  class="mini-sidebar">
       <!-- ============================================================== -->
       <!-- Topbar header - style you can find in pages.scss -->
       <!-- ============================================================== -->
@@ -50,49 +56,42 @@
               <b class="logo-icon ps-2">
                 <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                 <!-- Dark Logo icon -->
-                <img src="{{asset('front_assets/assets/images/logo-icon.png')}}" alt="homepage" class="light-logo" width="25">
+                <img src="{{asset('front_assets/assets/images/logo-icon.png')}}" alt="homepage" class="light-logo" width="25"> VideoClouds
               </b>
               <!--End Logo icon -->
               <!-- Logo text -->
               <span class="logo-text ms-2">
                 <!-- dark Logo text -->
-                <img src="{{asset('front_assets/assets/images/logo-icon.png')}}" alt="homepage" class="light-logo">
+                {{-- <img src="{{asset('front_assets/assets/images/logo-icon.png')}}" alt="homepage" class="light-logo"> --}}
                 {{-- <i class="mdi-account-plus"></i> --}}
               </span>
-              <!-- Logo icon -->
-              <!-- <b class="logo-icon"> -->
-              <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-              <!-- Dark Logo icon -->
-              <!-- <img src="../assets/images/logo-text.png" alt="homepage" class="light-logo" /> -->
-
-              <!-- </b> -->
-              <!--End Logo icon -->
             </a>
-            <!-- ============================================================== -->
-            <!-- End Logo -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Toggle which is visible on mobile only -->
-            <!-- ============================================================== -->
             <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
           </div>
           <!-- ============================================================== -->
           <!-- End Logo -->
           <!-- ============================================================== -->
+        
           <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
             <!-- ============================================================== -->
             <!-- toggle and nav items -->
             <!-- ============================================================== -->
+            
             <ul class="navbar-nav float-start me-auto">
               <li class="nav-item d-none d-lg-block">
-                <a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" data-sidebartype="mini-sidebar"><i class="mdi mdi-menu font-24"></i></a>
+                <a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)"><i class="mdi mdi-menu font-24"></i></a>
               </li>
               <!-- ============================================================== -->
               <!-- create new -->
               <!-- ============================================================== -->
+              <li class="nav-item d-none d-lg-block">
+                <a class="nav-link waves-effect waves-light" href="{{route('dashboard')}}">
+                  <span class="d-none d-md-block"><i class="fa-solid fa-house"></i> Home</span>
+                </a>
+              </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <span class="d-none d-md-block">Choose Category <i class="fa fa-angle-down"></i></span>
+                  <span class="d-none d-md-block"><i class="fa-regular fa-grid-2"></i> Choose Category <i class="fa fa-angle-down"></i></span>
                   <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -109,9 +108,7 @@
                   <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>
                 </a>
               </li> --}}
-                          <!-- ============================================================== -->
-              <!-- Search -->
-              <!-- ============================================================== -->
+                        
               <li class="nav-item search-box">
                 <a class="nav-link waves-effect waves-dark" href="javascript:void(0)"><i class="mdi mdi-magnify fs-4"></i></a>
                 <form class="app-search position-absolute">
@@ -140,12 +137,7 @@
                   </li>
                 </ul>
               </li>
-              <!-- ============================================================== -->
-              <!-- End Comment -->
-              <!-- ============================================================== -->
-              <!-- ============================================================== -->
-              <!-- Messages -->
-              <!-- ============================================================== -->
+    
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle waves-effect waves-dark" href="#" id="2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <i class="font-24 mdi mdi-comment-processing"></i>
@@ -224,13 +216,7 @@
                   </ul>
                 </ul>
               </li>
-              <!-- ============================================================== -->
-              <!-- End Messages -->
-              <!-- ============================================================== -->
-
-              <!-- ============================================================== -->
-              <!-- User profile and search -->
-              <!-- ============================================================== -->
+      
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <img src="{{$data->image}}" alt="user" class="rounded-circle" width="31">
@@ -255,13 +241,12 @@
                   </div>
                 </ul>
               </li>
-              <!-- ============================================================== -->
-              <!-- User profile and search -->
-              <!-- ============================================================== -->
             </ul>
           </div>
         </nav>
       </header>
+
+      
       <!-- ============================================================== -->
       <!-- End Topbar header -->
       <!-- ============================================================== -->
@@ -309,44 +294,16 @@
         <!-- ============================================================== -->
         <!-- Bread crumb and right sidebar toggle -->
         <!-- ============================================================== -->
-        <div class="page-breadcrumb">
-          <div class="row">
-            <div class="col-12 d-flex no-block align-items-center">
-              <div class="ms-auto text-end">
-                <nav aria-label="breadcrumb">
-                  <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">
-                      Library
-                    </li>
-                  </ol>
-                </nav>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- ============================================================== -->
-        <!-- End Bread crumb and right sidebar toggle -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Container fluid  -->
-        <!-- ============================================================== -->
+       
         <div class="container-fluid">
           @yield('content')
         </div>
-        <!-- ============================================================== -->
-        <!-- End Container fluid  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- footer -->
-        <!-- ============================================================== -->
+       
         <footer class="footer text-center">
           All Rights Reserved by Matrix-admin. Designed and Developed by
           <a href="https://www.wrappixel.com">WrapPixel</a>.
         </footer>
-        <!-- ============================================================== -->
-        <!-- End footer -->
-        <!-- ============================================================== -->
+     
       </div>
       <!-- ============================================================== -->
       <!-- End Page wrapper  -->
@@ -385,4 +342,6 @@
     <script src="{{asset('front_assets/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js')}}"></script>
     <script src="{{asset('front_assets/dist/js/pages/chart/chart-page-init.js')}}"></script>
     @stack('js')
-<div class="flotTip" style="position: absolute; left: 1028px; top: 617.013px; display: none;"></div></body></html>
+<div class="flotTip" style="position: absolute; left: 1028px; top: 617.013px; display: none;"></div>
+</body>
+</html>
