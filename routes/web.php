@@ -39,3 +39,6 @@ Route::post('/countlikes',[LikeController::class,'countLikes'])->name('countLike
 Route::post('/countdislikes',[LikeController::class,'countDislikes'])->name('countDislikes');
 Route::post('/removethumbsup',[LikeController::class,'removeLike'])->name('removeLike');
 Route::post('/updatecomment',[CommentController::class,'updateComment'])->name('updateComment');
+
+
+Route::get('/query',[UserController::class,'query']);

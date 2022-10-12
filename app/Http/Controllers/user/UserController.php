@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Like;
-
+use App\Models\Video;
+use Illuminate\Support\Facades\DB;
 
 
 class UserController extends Controller
@@ -112,6 +113,19 @@ class UserController extends Controller
         // $category_id = $video->category_id;
         // $category = Category::find('id',$category_id);
         return view('user.videodetails',compact('video','data','categories','like'));
+    }
+
+    public function query()
+    { 
+        $status = '1';
+        if(Category::where('status',$status)->exists())
+        {
+            $query = Category::where('status',$status)->get();
+        }else
+        {
+            $query = category::all();
+        }   
+        dd($query);
     }
 
 }
