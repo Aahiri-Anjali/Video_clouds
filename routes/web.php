@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\user\UserController;
 use App\Http\Controllers\user\CommentController;
 use App\Http\Controllers\user\LikeController;
+use App\Http\Controllers\ImportExcelController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,6 +40,8 @@ Route::post('/countlikes',[LikeController::class,'countLikes'])->name('countLike
 Route::post('/countdislikes',[LikeController::class,'countDislikes'])->name('countDislikes');
 Route::post('/removethumbsup',[LikeController::class,'removeLike'])->name('removeLike');
 Route::post('/updatecomment',[CommentController::class,'updateComment'])->name('updateComment');
+
+Route::get('/importexcel',[ImportExcelController::class,'importexcelShow'])->name('importexcelShow');
 
 
 Route::get('/query',[UserController::class,'query']);

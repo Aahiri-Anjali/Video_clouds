@@ -102,6 +102,12 @@
                   @endforeach
                 </ul>
               </li>
+
+              <li class="nav-item d-none d-lg-block">
+                <a class="nav-link waves-effect waves-light" href="{{route('importexcelShow')}}">
+                  <span class="d-none d-md-block"><i class="fa-solid fa-file-import"></i>  Import-Excel</span>
+                </a>
+              </li>
               {{-- <li class="nav-item dropdown">
                 <a class="nav-link" href="{{route('changePassword')}}" id="navbarDropdown" role="button">
                   <span class="d-none d-md-block">Change Password</span>
