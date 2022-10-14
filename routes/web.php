@@ -7,6 +7,7 @@ use App\Http\Controllers\user\UserController;
 use App\Http\Controllers\user\CommentController;
 use App\Http\Controllers\user\LikeController;
 use App\Http\Controllers\ImportExcelController;
+use App\Http\Controllers\LaravelformController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,7 +42,14 @@ Route::post('/countdislikes',[LikeController::class,'countDislikes'])->name('cou
 Route::post('/removethumbsup',[LikeController::class,'removeLike'])->name('removeLike');
 Route::post('/updatecomment',[CommentController::class,'updateComment'])->name('updateComment');
 
+//import and export
 Route::get('/importexcel',[ImportExcelController::class,'importexcelShow'])->name('importexcelShow');
+Route::post('/importexcel',[ImportExcelController::class,'importexcel'])->name('importexcel');
+Route::get('/displayexcel',[ImportExcelController::class,'displayexcel'])->name('displayexcel');
+Route::get('/export',[ImportExcelController::class,'export'])->name('export');
 
-
+//query
 Route::get('/query',[UserController::class,'query']);
+
+//laravel form
+Route::get('/laravelform',[LaravelformController::class,'laravelformShow'])->name('laravelform.show');

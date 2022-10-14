@@ -108,12 +108,17 @@
                   <span class="d-none d-md-block"><i class="fa-solid fa-file-import"></i>  Import-Excel</span>
                 </a>
               </li>
-              {{-- <li class="nav-item dropdown">
-                <a class="nav-link" href="{{route('changePassword')}}" id="navbarDropdown" role="button">
-                  <span class="d-none d-md-block">Change Password</span>
-                  <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>
+              <li class="nav-item d-none d-lg-block">
+                <a class="nav-link waves-effect waves-light" href="{{route('displayexcel')}}">
+                  <span class="d-none d-md-block"><i class="fa-solid fa-file-export"></i>  Export-Excel</span>
                 </a>
-              </li> --}}
+              </li>
+              <li class="nav-item d-none d-lg-block">
+                <a class="nav-link waves-effect waves-light" href="{{route('laravelform.show')}}">
+                  <span class="d-none d-md-block">  Laravel Form</span>
+                </a>
+              </li>
+            
                         
               <li class="nav-item search-box">
                 <a class="nav-link waves-effect waves-dark" href="javascript:void(0)"><i class="mdi mdi-magnify fs-4"></i></a>

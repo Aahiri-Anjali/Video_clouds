@@ -18,7 +18,7 @@ class CreateImportexcelTable extends Migration
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('name')->nullable();
             $table->string('email')->nullable();
-            $table->integer('mobile')->nullable();
+            $table->string('mobile')->nullable();
             $table->timestamps();
         });
     }
