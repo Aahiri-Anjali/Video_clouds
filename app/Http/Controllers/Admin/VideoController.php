@@ -36,8 +36,9 @@ class VideoController extends Controller
      */
     public function create(VideoDataTable $dataTable)
     {
+        // dd($dataTable);
         $categories = Category::where('status', '1')->get();
-        return $dataTable->render('admin.video', compact('categories'));
+        return $dataTable->render('admin.video', compact('categories')); 
     }
 
     /**

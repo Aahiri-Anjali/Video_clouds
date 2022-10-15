@@ -8,6 +8,8 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Illuminate\Http\Request;
+
 
 class VideoDataTable extends DataTable
 {
@@ -39,9 +41,18 @@ class VideoDataTable extends DataTable
      * @param \App\Models\VideoDataTable $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Video $model)
-    {
-        return $model->with('category')->newQuery();
+    public function query(Video $model,Request $request)
+    {      
+        $query = $model->with('category')->newQuery();
+        if($request->daterange != '')
+        {
+            $query = $model->whereBetween('published_at',explode('-',$request->daterange));
+        }
+        if($request->daterange == '')
+        {
+            $query = $model->with('category')->newQuery();
+        }
+        return $this->applyScopes($query);  
     }
 
     /**
@@ -64,6 +75,7 @@ class VideoDataTable extends DataTable
                         Button::make('reset'),
                         Button::make('reload')
                     );
+                    
     }
 
     /**

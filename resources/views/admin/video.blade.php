@@ -139,24 +139,74 @@
 
 
 <div class="container">
+
     <table class="table table-border relod">
+        <form role="form" method="POST" name="search_form" id="search_form">
+            <div class="col-5">
+                <label class="form-label">Date Range</label>
+                <div class="input-group date" id="datepicker">
+                    <input type="text" id="daterange" name="daterange" class="form-control" />
+                <span class="input-group-append">
+                    <span class="input-group-text bg-light d-block">
+                    <i class="fa fa-calendar"></i>
+                    </span>
+                </span>
+                </div>
+            </div>
+        </form>
+            
             <tbody>
                 {!! $dataTable->table() !!}
             </tbody>
     </table>
+
 </div>
 @endsection
 
 @push('js')
-
 {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>   --}}
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     
    
 {!! $dataTable->scripts() !!}
 <script>
+   
     $(document).ready(function() {
+      
+        $(function() {
+            $('#daterange').daterangepicker({
+                autoUpdateInput: false,
+                locale: {
+                    cancelLabel: 'Clear'
+                }
+            });
+        
+            $('#daterange').on('apply.daterangepicker', function(ev, picker) {
+               var date= $(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format('YYYY-MM-DD'));
+               $('#search_form').trigger('change')
+            });
 
+            $('#daterange').on('cancel.daterangepicker', function(ev, picker) {
+                $(this).val('');
+            });
+            $('#search_form').on('change', function(e) {
+                console.log("change in serach form"); 
+            if (e.type == 'submit') {
+                e.preventDefault();
+            }
+            setTimeout(function() {
+                console.log("table draw called")
+                window.LaravelDataTables['videodatatable-table'].draw() 
+            }, 500);
+          
+        });
+            $('#videodatatable-table').on('preXhr.dt', function ( e, settings, data ) {
+                data.daterange = $('#daterange').val(); 
+                console.log("in preXhr",$('#daterange').val())
+            });
+           
+        });
+        
         $('#video_close').click(function(){
             $('#video_modal').hide();
         });
