@@ -1,0 +1,1 @@
+alert('this is laravel mix 2');

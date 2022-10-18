@@ -180,29 +180,34 @@
                     cancelLabel: 'Clear'
                 }
             });
-        
+
             $('#daterange').on('apply.daterangepicker', function(ev, picker) {
                var date= $(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format('YYYY-MM-DD'));
-               $('#search_form').trigger('change')
+               $('#search_form').trigger('change');             
             });
 
             $('#daterange').on('cancel.daterangepicker', function(ev, picker) {
                 $(this).val('');
+                if($(this).val() == "")
+                {
+                    window.LaravelDataTables['videodatatable-table'].draw();
+                }  
             });
+
             $('#search_form').on('change', function(e) {
                 console.log("change in serach form"); 
-            if (e.type == 'submit') {
-                e.preventDefault();
-            }
-            setTimeout(function() {
-                console.log("table draw called")
-                window.LaravelDataTables['videodatatable-table'].draw() 
-            }, 500);
-          
-        });
+                if (e.type == 'submit') {
+                    e.preventDefault();
+                }
+                setTimeout(function() {
+                    console.log("table draw called")
+                    window.LaravelDataTables['videodatatable-table'].draw();
+                }, 500);                                                
+            });
+
             $('#videodatatable-table').on('preXhr.dt', function ( e, settings, data ) {
                 data.daterange = $('#daterange').val(); 
-                console.log("in preXhr",$('#daterange').val())
+                console.log(data.daterange);                       
             });
            
         });

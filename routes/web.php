@@ -54,3 +54,10 @@ Route::get('/query',[UserController::class,'query']);
 //laravel form
 Route::get('/laravelform',[LaravelformController::class,'laravelformShow'])->name('laravelform.show');
 Route::post('/laravelform',[LaravelformController::class,'laravelformSubmit'])->name('laravelform.submit');
+
+//laravel mix(webpack.mix)
+// Route::get('/laravelmix',function(){
+//     return view('laravelmix');
+// });
+
+Route::view('/laravelmix','laravelmix');

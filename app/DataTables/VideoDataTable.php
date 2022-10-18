@@ -43,17 +43,13 @@ class VideoDataTable extends DataTable
      */
     public function query(Video $model,Request $request)
     {      
-        $query = $model->with('category')->newQuery();
         if($request->daterange != '')
         {
-            $query = $model->whereBetween('published_at',explode('-',$request->daterange));
-        }
-        if($request->daterange == '')
-        {
-            $query = $model->with('category')->newQuery();
-        }
-        return $this->applyScopes($query);  
-    }
+            $date = explode(' - ',$request->daterange);          
+            $model = $model->whereBetween('published_at',[$date[0],$date[1]]);          
+        }      
+        return $model->with('category')->newQuery();
+     }
 
     /**
      * Optional method if you want to use html builder.

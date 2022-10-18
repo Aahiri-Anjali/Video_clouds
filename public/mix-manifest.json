@@ -1,4 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css"
+    "/js/laravelmix.js": "/js/laravelmix.js",
+    "/js/commom.js": "/js/commom.js",
+    "/css/app.css": "/css/app.css",
+    "/css/laravelmix.css": "/css/laravelmix.css"
 }
