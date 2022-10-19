@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Traits;
+use App\Models\Video;
 
 trait CommonTrait
 {
-     public function demofunction($str)
+     public function getVideoId($id)
      {
-        echo $str;
+         return Video::where('id',$id)->first();
      }
 }

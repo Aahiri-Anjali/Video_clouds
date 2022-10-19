@@ -1,7 +1,6 @@
 @extends('admin_layout.admin_main')
 
 @section('content')
-<h3>{{$data}}</h3>
     <table class="table table-striped">
        
         <thead>
@@ -37,12 +36,7 @@
                 <tr>
                    <td colspan="10"> <center><h3> Data Not Available</h3></center><td>
                 </tr>
-            @endforelse
-            {{-- @if(empty($trashedvideo))
-            <tr>
-                <center> Data Not Available</center>
-            </tr>
-            @endif --}}
+            @endforelse        
         </tbody>
     </table>
 @endsection

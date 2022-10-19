@@ -349,7 +349,7 @@
             id = $(this).val();
             swal({
                 title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this Data!..",
+                // text: "Once deleted, you will not be able to recover this Data!..",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true
@@ -369,7 +369,7 @@
                             swal({
                                 icon:"success",
                                 text:response.data,
-                                title:"Data Deleted"
+                                title:"Data Trashed"
                             });
                             window.LaravelDataTables['videodatatable-table'].draw();
                         }
@@ -377,20 +377,7 @@
                 });
             }
             });
-        });
-
-        // $(document).on('click','#trash',function(){
-        //     var id = $(this).val();
-        //     $.ajax({
-        //         url:"route('videoTrash')",
-        //         dataType:"json",
-        //         type:"post",
-        //         data:{id:id},
-        //         success:function(){
-
-        //         }
-        //     })
-        // });
+        });     
 
         $(document).on('click','#img',function(){
             $('#video_modal').show();
@@ -473,4 +460,3 @@
     });
 </script> 
  @endpush
-{{-- 1664436308animate.mp4 --}}

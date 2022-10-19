@@ -21,7 +21,7 @@ mix.js('resources/js/laravelmix.js','public/js')
     //multiple files in same public file
 mix.js(['resources/js/laravelmix.js','resources/js/laravelmix2.js'],'public/js/commom.js');
 
-mix.js('resources/admin/js/trashedvideo.js','public/admin/js');
+// mix.js('resources/admin/js/trashedvideo.js','public/admin/js');
   
 
    

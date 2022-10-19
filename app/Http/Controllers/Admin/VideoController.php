@@ -234,27 +234,26 @@ class VideoController extends Controller
     {
         $video = Video::find($id);
         $images = Image::where('video_id',$id)->get();
-        // dd($images);
         if(isset($video))
         {
-            File::delete(public_path() . '/upload/'. $video->getRawOriginal('video'));
             if(isset($images))
             {
                 foreach($images as $image)
                 {
-                    File::delete(public_path() . '/upload/'. $image->getRawOriginal('image'));                  
                     $image->delete();
                 }              
             }           
             $video->delete();    
 
-            return response()->json(['status'=>200,"data"=>"Deleted Successfully"]);
+            return response()->json(['status'=>200,"data"=>"Trashed Successfully"]);
         }
     }
 
     public function videoModal(Request $request)
     {
-        $video = video::find($request->id);
+        // $video = video::find($request->id);
+        $video = $this->getVideoId($request->id);
+        // dd($video);
         $images = Image::where('video_id',$request->id)->get();
         // dd($images);
         if(isset($video) && !empty($video))
@@ -285,30 +284,45 @@ class VideoController extends Controller
     public function videoTrashed(Request $request)
     {
         $trashedvideo = Video::onlyTrashed()->get();  
-        $data = $this->demofunction("Hello !!This is for Demo"); 
-        // dd($data);  
-        return view('admin.trashedvideo',compact('trashedvideo','data'));
+        return view('admin.trashedvideo',compact('trashedvideo'));
     }
 
     public function videoRestore($id)
     {
         $video = Video::withTrashed()->find($id);
+        $images = Image::withTrashed()->where('video_id',$id)->get();
         if(!is_null($video))
         {
             $video->restore();
-            return back();
+            if(!is_null($images))
+            {
+                foreach($images as $image)
+                {
+                    $image->restore();
+                }
+            }
         }
+        return back();
     }
 
     
     public function videoDelete($id)
     {
         $video = Video::withTrashed()->find($id);
-        if(!is_null($video))
+        $images = Image::withTrashed()->where('video_id',$id)->get();
+        if(isset($video))
         {
-            $video->forceDelete();
-            return back();
-        }
+            File::delete(public_path() . '/upload/'. $video->getRawOriginal('video'));
+            if(isset($images))
+            {
+                foreach($images as $image)
+                {
+                    File::delete(public_path() . '/upload/'. $image->getRawOriginal('image'));                  
+                    $image->forceDelete();
+                }              
+            }           
+            $video->forceDelete();  
+        }  
     }
 }
 
