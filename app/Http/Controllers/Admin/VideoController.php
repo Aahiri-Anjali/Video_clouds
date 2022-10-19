@@ -14,6 +14,7 @@ use App\Http\Requests\VideoUpdateRequest;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;  
 use  App\Models\Image;
+use App\Http\Traits\CommonTrait;
 // use Illuminate\Support\Facades\Input;
 
 
@@ -24,6 +25,8 @@ class VideoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    use CommonTrait;
+
     public function index()
     {
         
@@ -121,9 +124,7 @@ class VideoController extends Controller
             }
 
         }
-        
 
-        
         $video = Video::updateOrCreate(
             ['id' => $request->video_id],
             ['title'=>$request['title'],
@@ -136,7 +137,7 @@ class VideoController extends Controller
             'status'=>'1',
             'user_type'=>$request['user_type'],
             'link'=>Str::random(11),
-            'slug'=>Str::slug($request['title'], "-"),
+            // 'slug'=>Str::slug($request['title'], "-"),
         ]);
 
         
@@ -165,6 +166,7 @@ class VideoController extends Controller
     {
         //
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -277,6 +279,35 @@ class VideoController extends Controller
             }
             $id->save();
             return response()->json(['status'=>200]);
+        }
+    }
+
+    public function videoTrashed(Request $request)
+    {
+        $trashedvideo = Video::onlyTrashed()->get();  
+        $data = $this->demofunction("Hello !!This is for Demo"); 
+        // dd($data);  
+        return view('admin.trashedvideo',compact('trashedvideo','data'));
+    }
+
+    public function videoRestore($id)
+    {
+        $video = Video::withTrashed()->find($id);
+        if(!is_null($video))
+        {
+            $video->restore();
+            return back();
+        }
+    }
+
+    
+    public function videoDelete($id)
+    {
+        $video = Video::withTrashed()->find($id);
+        if(!is_null($video))
+        {
+            $video->forceDelete();
+            return back();
         }
     }
 }

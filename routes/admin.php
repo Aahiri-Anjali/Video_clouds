@@ -32,6 +32,9 @@ Route::group(['middleware' => 'auth:admin'],function(){
     Route::resource('video',VideoController::class);
     Route::post('/video/status','VideoController@statusChange')->name('videoStatus');
     Route::post('/video/modal','VideoController@videoModal')->name('videoModal');
+    Route::get('/video/trashed/record','VideoController@videoTrashed')->name('videoTrashed');
+    Route::get('/video/restore/record/{id}','VideoController@videoRestore')->name('videoRestore');
+    Route::get('/video/delete/record/{id}','VideoController@videoDelete')->name('videoDelete');
     Route::post('/image-icon',[ImageController::class,'imageDelete'])->name('imageDelete');
 });
 

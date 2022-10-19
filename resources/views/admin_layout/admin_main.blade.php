@@ -160,6 +160,12 @@
                                     <p>Videos</p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.videoTrashed')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Trashed Videos</p>
+                                </a>
+                            </li>
                         </ul>
                     </ul>
                 </nav>

@@ -344,7 +344,7 @@
         });
 
 
-        $(document).on('click','#delete',function(e){
+        $(document).on('click','#trash',function(e){
             e.preventDefault();
             id = $(this).val();
             swal({
@@ -378,6 +378,19 @@
             }
             });
         });
+
+        // $(document).on('click','#trash',function(){
+        //     var id = $(this).val();
+        //     $.ajax({
+        //         url:"route('videoTrash')",
+        //         dataType:"json",
+        //         type:"post",
+        //         data:{id:id},
+        //         success:function(){
+
+        //         }
+        //     })
+        // });
 
         $(document).on('click','#img',function(){
             $('#video_modal').show();

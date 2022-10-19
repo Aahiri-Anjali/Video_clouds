@@ -27,7 +27,7 @@ class VideoDataTable extends DataTable
                 return "<button id='status' type='button' value='".$videos->id."' data-status='".$videos->status."' class='badge badge-".($videos->status==0?'danger':'success')."'>".($videos->status==0?'Deactive':'Active')."</button>";
             })
             ->addColumn('action', static function ($videos) {
-                return "<button type='button' value='".$videos->id."' class='btn btn-primary' id='edit' data-toggle='modal' data-target='#myModal'>Edit</button><button class='btn btn-danger' value='".$videos->id."' id='delete'>Delete</button>";
+                return "<button type='button' value='".$videos->id."' class='btn btn-primary' id='edit' data-toggle='modal' data-target='#myModal'>Edit</button><button class='btn btn-danger' value='".$videos->id."' id='trash'>Trash</button>";
             })
             ->editColumn('video',static function ($videos){
                 return '<img id="img" src="'.asset("/upload/videoimg.webp").'" value-id="'.$videos->id.'" height="100px" width="100px">';
