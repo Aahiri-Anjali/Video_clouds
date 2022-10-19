@@ -217,7 +217,7 @@ class VideoController extends Controller
                             'category_id'=>$request['category_type'],
                             'published_at'=>$request['date'],
                             'user_type'=>$request['user_type'],
-                        ]);
+                           ]);
 
             $return = ['status'=>200,'data'=>'Data updated'];          
         }
@@ -252,7 +252,7 @@ class VideoController extends Controller
     public function videoModal(Request $request)
     {
         // $video = video::find($request->id);
-        $video = $this->getVideoId($request->id);
+        $video = $this->getVideoId($request->id); 
         // dd($video);
         $images = Image::where('video_id',$request->id)->get();
         // dd($images);
