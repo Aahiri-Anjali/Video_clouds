@@ -180,6 +180,7 @@ return [
         Yajra\DataTables\EditorServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Laravel\Passport\PassportServiceProvider::class,
 
     ],
 

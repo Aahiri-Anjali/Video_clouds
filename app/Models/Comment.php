@@ -10,7 +10,7 @@ class Comment extends Model
     use HasFactory;
     protected $table = 'comments';
 
-    protected $fillable = ['comment'];
+    protected $fillable = ['video_id','user_id','comment'];
 
     public function user()
     {

@@ -29,20 +29,19 @@ class UserController extends Controller
     {
        $data = $this->userRepository->getUserinfo();
        $categories = Category::all();
-       return view('user.userdetail',compact('data','categories'));
+       return view('user.userdetail',compact('data','categories'));        
     }
 
     public function userInfoUpdate(UserUpdateRequest $request)
     {
         // return $validator = $request->validated();
+        // dd($request->all());
         $user = User::where('id', Auth::user()->id)->first();
         $existimage = $user->getRawOriginal('image');
-
         if($request->hasFile('image')){
             $filename = time().$request->file('image')->getClientOriginalName();
             $request->file('image')->move(public_path().'/upload/',$filename);
-        }
-        
+        }       
         $update = $user->update(['first_name'=>$request['fname'],
                               'last_name'=>$request['lname'],
                               'mobile'=>$request['mobile'],
@@ -52,7 +51,6 @@ class UserController extends Controller
                               'address'=>$request['address'],
                               'image'=>$filename ?? $existimage,
                             ]);
-
         if($update)
         {
             return back()->with('success',"Updated SuccessFully");
@@ -60,7 +58,6 @@ class UserController extends Controller
         else{
             return back()->with('error'," Not Updated");
         }
-
     }
 
     public function changePassword()
@@ -74,7 +71,6 @@ class UserController extends Controller
     {
         $user = User::where('id',Auth::user()->id)->first();
         $userpass = $user->password;
-        // print_r($userpass);
         $newpass = $request['newpassword'];
         $currentpass = $request['currentpassword'];
         if(Hash::check($currentpass,$userpass))
@@ -98,7 +94,6 @@ class UserController extends Controller
     {
         $data = $this->userRepository->getUserinfo();
         $categories = Category::all();
-        // $category = Category::find('id',$id);
         $videos = $this->userRepository->getCategoryWiseVideo($id);
         $lastvideo = $this->userRepository->getLastVideo($id);   
         return view('user.categorywisevideo',compact('videos','data','categories','lastvideo'));

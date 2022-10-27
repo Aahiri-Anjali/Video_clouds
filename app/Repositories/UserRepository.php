@@ -13,6 +13,10 @@ class UserRepository implements UserRepositoryInterface
     {
         return Auth::user();    
     }
+    // public function getUserinfo()
+    // {
+    //     return Auth::guard('web_user')->user();    
+    // }
 
     public function getCategoryWiseVideo($id)
     {

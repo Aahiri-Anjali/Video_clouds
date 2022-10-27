@@ -51,7 +51,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        return  Validator::make($data, [
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'min:8'],
             'cpassword' => ['required', 'same:password'],
@@ -64,6 +64,7 @@ class RegisterController extends Controller
             'address' => ['required'],
             'mobile' => ['required', 'numeric', 'min:11'],
         ]);
+
     }
 
     /**
@@ -74,7 +75,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // dd($data);
         if (isset($data['image'])) {
             $filename = time() . $data['image']->getClientOriginalName();
             $data['image']->move(public_path() . '/upload/', $filename);
@@ -83,7 +83,7 @@ class RegisterController extends Controller
 
           NotifyMailJob::dispatch($data['email'], $data['fname']);
 
-          return User::create([
+          return  User::create([
             'first_name' => $data['fname'],
             'last_name' => $data['lname'],
             'email' => $data['email'],

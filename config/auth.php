@@ -40,9 +40,21 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'web_user' => [
+            'driver' => 'passport',
+            'provider' => 'users',
+        ],
         'admin' =>[
             'driver' => 'session',
             'provider' => 'admins',
+        ],
+        'api' =>[
+            'driver' => 'passport',
+            'provider' => 'api_users',
+        ],
+        'api_attempt' =>[
+            'driver' => 'session', //it provides attempt(), createToken()
+            'provider' => 'api_users',
         ],
     ],
 
@@ -73,10 +85,10 @@ return [
             'model' => App\Models\Admin::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'api_users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\ApiUser::class,
+        ],
     ],
 
     /*
