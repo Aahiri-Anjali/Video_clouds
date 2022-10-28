@@ -34,8 +34,6 @@ class UserController extends Controller
 
     public function userInfoUpdate(UserUpdateRequest $request)
     {
-        // return $validator = $request->validated();
-        // dd($request->all());
         $user = User::where('id', Auth::user()->id)->first();
         $existimage = $user->getRawOriginal('image');
         if($request->hasFile('image')){

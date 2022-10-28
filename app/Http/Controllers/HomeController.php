@@ -8,6 +8,7 @@ use App\Models\Video;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 
+
 class HomeController extends Controller
 {
     public $userRepository;

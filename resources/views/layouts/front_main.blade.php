@@ -230,7 +230,7 @@
       
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img src="{{$data->image}}" alt="user" class="rounded-circle" width="31">
+                  <img src="{{$data->image!=""?$data->image:$data->avatar}}" alt="user" class="rounded-circle" width="31">               
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">               
                   <a class="dropdown-item" href="{{route('userInfo')}}"><i class="mdi mdi-account me-1 ms-1"></i> My Profile</a>

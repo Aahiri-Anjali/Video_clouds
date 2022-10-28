@@ -8,6 +8,7 @@ use App\Http\Controllers\user\CommentController;
 use App\Http\Controllers\user\LikeController;
 use App\Http\Controllers\ImportExcelController;
 use App\Http\Controllers\LaravelformController;
+use App\Http\Controllers\GoogleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -61,3 +62,7 @@ Route::post('/laravelform',[LaravelformController::class,'laravelformSubmit'])->
 // });
 
 Route::view('/laravelmix','laravelmix');
+
+// Socilalite routes of google
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
+Route::get('callback/google', [GoogleController::class, 'callbackFromGoogle']);

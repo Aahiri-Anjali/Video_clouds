@@ -75,6 +75,12 @@
                                     @endif
                                 </div>
                             </div>
+                            <p style="text-align:center">OR</p>
+                            <div class="row mb-3">
+                                <div class=" offset-md-4 col-md-10">
+                                    <a href="{{ url('auth/google') }}"  class="btn btn-light"><img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/> Login With Google</a>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>

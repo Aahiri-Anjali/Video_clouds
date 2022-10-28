@@ -29,7 +29,9 @@ class User extends Authenticatable
         'image',
         'address',
         'mobile',
-
+        'social_id',
+        'social_type',
+        'avatar',
     ];
 
     /**
