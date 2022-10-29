@@ -78,7 +78,17 @@
                             <p style="text-align:center">OR</p>
                             <div class="row mb-3">
                                 <div class=" offset-md-4 col-md-10">
-                                    <a href="{{ url('auth/google') }}"  class="btn btn-light"><img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/> Login With Google</a>
+                                    <a href="{{ url('auth/google') }}"  class="btn btn-light"><img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/> Continue With Google</a>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class=" offset-md-4 col-md-10">
+                                    <a href="{{ url('auth/facebook') }}"><img class="img" src="https://scontent.fstv4-1.fna.fbcdn.net/v/t39.2365-6/294967112_614766366879300_4791806768823542705_n.png?_nc_cat=105&amp;ccb=1-7&amp;_nc_sid=ad8a9d&amp;_nc_ohc=-7Eal1ebej0AX9Qi21D&amp;_nc_ht=scontent.fstv4-1.fna&amp;oh=00_AfBCId6O3aZJicnRl75G1YdUvO9t9tPB8ox8tWmbXWVsUQ&amp;oe=6360B7E4" width="230" alt=""></a>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class=" offset-md-4 col-md-10">
+                                    <a href="{{ url('auth/github') }}"><img src="https://coderwall-assets-0.s3.amazonaws.com/uploads/picture/file/4363/github.png" width="230" alt="github.png"></a>
                                 </div>
                             </div>
                         </form>

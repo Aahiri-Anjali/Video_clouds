@@ -3,20 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Socialite;
+use Laravel\Socialite\Facades\Socialite;
 use Auth;
 use App\Models\User;
 
-class GoogleController extends Controller
+class GithubController extends Controller
 {
-    public function redirectToGoogle()
+    public function redirectToGithub()
     {
-        return socialite::driver('google')->redirect();
+        return Socialite::driver('github')->redirect();
     }
 
-    public function callbackFromGoogle()
-    {      
-        $user = socialite::driver('google')->stateless()->user();      
+    public function callbackFromGithub()
+    {     
+        
+        $user = Socialite::driver('github')->stateless()->user();
+        // dd($user);
         $finduser = User::where('social_id', $user->id)->first();
 
         if($finduser){ 
@@ -29,8 +31,8 @@ class GoogleController extends Controller
                     [
                         'first_name'=>$user->name,
                         'email' => $user->email,
-                        'social_id'=> $user->id, 
-                        'social_type'=> 'google',
+                        'social_id'=> $user->id,
+                        'social_type'=> 'github',
                         'avatar' => $user->avatar,
                     ]
                 );  
@@ -39,4 +41,3 @@ class GoogleController extends Controller
         }
     }
 }
-

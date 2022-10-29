@@ -9,6 +9,9 @@ use App\Http\Controllers\user\LikeController;
 use App\Http\Controllers\ImportExcelController;
 use App\Http\Controllers\LaravelformController;
 use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\FacebookController;
+use App\Http\Controllers\GithubController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -66,3 +69,11 @@ Route::view('/laravelmix','laravelmix');
 // Socilalite routes of google
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
 Route::get('callback/google', [GoogleController::class, 'callbackFromGoogle']);
+
+// Socilalite routes of facebook
+Route::get('auth/facebook', [FacebookController::class, 'redirectToFacebook']);
+Route::get('callback/facebook', [FacebookController::class, 'callbackFromFacebook']);
+
+// Socilalite routes of github
+Route::get('auth/github', [GithubController::class, 'redirectToGithub']);
+Route::get('callback/github', [GithubController::class, 'callbackFromGithub']);
