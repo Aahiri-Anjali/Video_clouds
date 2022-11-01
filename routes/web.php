@@ -11,6 +11,8 @@ use App\Http\Controllers\LaravelformController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\GithubController;
+use App\Http\Controllers\LanguageController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -77,3 +79,8 @@ Route::get('callback/facebook', [FacebookController::class, 'callbackFromFaceboo
 // Socilalite routes of github
 Route::get('auth/github', [GithubController::class, 'redirectToGithub']);
 Route::get('callback/github', [GithubController::class, 'callbackFromGithub']);
+
+// Change Language
+// Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
+
+Route::get('lang/{lang}',[LanguageController::class,'switchLang'])->name('lang.switch');

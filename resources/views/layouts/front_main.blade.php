@@ -86,12 +86,12 @@
               <!-- ============================================================== -->
               <li class="nav-item d-none d-lg-block">
                 <a class="nav-link waves-effect waves-light" href="{{route('dashboard')}}">
-                  <span class="d-none d-md-block"><i class="fa-solid fa-house"></i> Home</span>
+                  <span class="d-none d-md-block"><i class="fa-solid fa-house"></i> {{__('message.home')}}</span>
                 </a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <span class="d-none d-md-block"><i class="fa-regular fa-grid-2"></i> Choose Category <i class="fa fa-angle-down"></i></span>
+                  <span class="d-none d-md-block"><i class="fa-regular fa-grid-2"></i> {{__('message.category')}} <i class="fa fa-angle-down"></i></span>
                   <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -105,17 +105,17 @@
 
               <li class="nav-item d-none d-lg-block">
                 <a class="nav-link waves-effect waves-light" href="{{route('importexcelShow')}}">
-                  <span class="d-none d-md-block"><i class="fa-solid fa-file-import"></i>  Import-Excel</span>
+                  <span class="d-none d-md-block"><i class="fa-solid fa-file-import"></i> {{__('message.import')}}</span>
                 </a>
               </li>
               <li class="nav-item d-none d-lg-block">
                 <a class="nav-link waves-effect waves-light" href="{{route('displayexcel')}}">
-                  <span class="d-none d-md-block"><i class="fa-solid fa-file-export"></i>  Export-Excel</span>
+                  <span class="d-none d-md-block"><i class="fa-solid fa-file-export"></i> {{__('message.export')}}</span>
                 </a>
               </li>
               <li class="nav-item d-none d-lg-block">
                 <a class="nav-link waves-effect waves-light" href="{{route('laravelform.show')}}">
-                  <span class="d-none d-md-block">  Laravel Form</span>
+                  <span class="d-none d-md-block">  {{__('message.laravel')}}</span>
                 </a>
               </li>
             
@@ -135,17 +135,16 @@
               <!-- ============================================================== -->
               <!-- Comment -->
               <!-- ============================================================== -->
+              
+
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i class="mdi mdi-bell font-24"></i>
-                </a>
+                    {{ Config::get('languages')[App::getLocale()] }}                            </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                  </li>
+                    @foreach (Config::get('languages') as $lang => $language)
+                        @if ($lang != App::getLocale())
+                        <a class="dropdown-item" href="{{ route('lang.switch', $lang) }}"> {{$language}}</a>                                    @endif
+                    @endforeach                      
                 </ul>
               </li>
     
@@ -233,15 +232,15 @@
                   <img src="{{$data->image!=""?$data->image:$data->avatar}}" alt="user" class="rounded-circle" width="31">               
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">               
-                  <a class="dropdown-item" href="{{route('userInfo')}}"><i class="mdi mdi-account me-1 ms-1"></i> My Profile</a>
+                  <a class="dropdown-item" href="{{route('userInfo')}}"><i class="mdi mdi-account me-1 ms-1"></i> {{__('message.profile')}}</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="{{route('changePassword')}}"><i class="mdi mdi-account me-1 ms-1"></i> Change Password</a>
+                  <a class="dropdown-item" href="{{route('changePassword')}}"><i class="mdi mdi-account me-1 ms-1"></i> {{__('message.changepass')}}</a>
                   <div class="dropdown-divider"></div>
 
                   <a class="dropdown-item" href="{{ route('logout') }}"
                       onclick="event.preventDefault();
                                     document.getElementById('front-logout-form').submit();">
-                      <i class="fa fa-power-off me-1 ms-1"></i> Logout
+                      <i class="fa fa-power-off me-1 ms-1"></i> {{__('message.logout')}}
                   </a>
 
                   <form id="front-logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -275,19 +274,16 @@
               </li>
              
               <li class="sidebar-item">
-                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="widgets.html" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Widgets</span></a>
+                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu"> {{__('message.widget')}}</span></a>
               </li>
               <li class="sidebar-item">
-                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="tables.html" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Tables</span></a>
+                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu"> {{__('message.tables')}}</span></a>
+              </li>        
+              <li class="sidebar-item">
+                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="mdi mdi-relative-scale"></i><span class="hide-menu"> {{__('message.buttons')}}</span></a>
               </li>
               <li class="sidebar-item">
-                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="grid.html" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Full Width</span></a>
-              </li>            
-              <li class="sidebar-item">
-                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="pages-buttons.html" aria-expanded="false"><i class="mdi mdi-relative-scale"></i><span class="hide-menu">Buttons</span></a>
-              </li>
-              <li class="sidebar-item">
-                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="pages-elements.html" aria-expanded="false"><i class="mdi mdi-pencil"></i><span class="hide-menu">Elements</span></a>
+                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="mdi mdi-pencil"></i><span class="hide-menu"> {{__('message.elements')}}</span></a>
               </li>                          
             </ul>
           </nav>

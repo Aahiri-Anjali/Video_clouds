@@ -12,7 +12,7 @@
                     </center>
                 {{-- </div> --}}
                 <div class="form-group row">
-                    <label for="fname" class="col-sm-3 text-end control-label col-form-label">First Name</label>
+                    <label for="fname" class="col-sm-3 text-end control-label col-form-label">{{__('message.f_name')}}</label>
                     <div class="col-sm-9">
                     <input type="text" class="form-control" id="fname" name="fname" placeholder="First Name Here" value="{{old('fname',$data->first_name)}}">
                     @error('fname')
@@ -21,7 +21,7 @@
                     </div>     
                 </div>
                 <div class="form-group row">
-                    <label for="lname" class="col-sm-3 text-end control-label col-form-label">Last Name</label>
+                    <label for="lname" class="col-sm-3 text-end control-label col-form-label">{{__('message.l_name')}}</label>
                     <div class="col-sm-9">
                     <input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name Here" value="{{old('lname',$data->last_name)}}">
                     @error('lname')
@@ -30,13 +30,13 @@
                     </div>
                 </div>
                  <div class="form-group row">
-                    <label for="cono1" class="col-sm-3 text-end control-label col-form-label">Email Id</label>
+                    <label for="cono1" class="col-sm-3 text-end control-label col-form-label">{{__('message.email')}}</label>
                     <div class="col-sm-9">
                     <input type="text" class="form-control" id="email" name="email" placeholder="First Name Here" value="{{$data->email}}" disabled>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="lname" class="col-sm-3 text-end control-label col-form-label">Mobile No.</label>
+                    <label for="lname" class="col-sm-3 text-end control-label col-form-label">{{__('message.mobile')}}</label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" id="mobile" name="mobile" placeholder="First Name Here" value="{{old('mobile',$data->mobile)}}">
                         @error('mobile')
@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="lname" class="col-sm-3 text-end control-label col-form-label">Country</label>
+                    <label for="lname" class="col-sm-3 text-end control-label col-form-label">{{__('message.country')}}</label>
                     <div class="col-sm-9">
                        <input type="text" class="form-control" id="country" name="country" placeholder="First Name Here" value="{{old('country',$data->country)}}">
                        @error('country')
@@ -54,7 +54,7 @@
                     </div>                  
                 </div>
                 <div class="form-group row">
-                    <label for="lname" class="col-sm-3 text-end control-label col-form-label">State</label>
+                    <label for="lname" class="col-sm-3 text-end control-label col-form-label">{{__('message.state')}}</label>
                     <div class="col-sm-9">
                        <input type="text" class="form-control" id="state" name="state" placeholder="First Name Here" value="{{old('state',$data->state)}}">
                        @error('state')
@@ -63,7 +63,7 @@
                     </div>   
                 </div>
                 <div class="form-group row">
-                    <label for="lname" class="col-sm-3 text-end control-label col-form-label">City</label>
+                    <label for="lname" class="col-sm-3 text-end control-label col-form-label">{{__('message.city')}}</label>
                     <div class="col-sm-9">
                        <input type="text" class="form-control" id="city" name="city" placeholder="First Name Here" value="{{old('city',$data->city)}}">
                        @error('city')
@@ -72,7 +72,7 @@
                     </div>
                 </div>              
                 <div class="form-group row">
-                    <label for="email1" class="col-sm-3 text-end control-label col-form-label">Address</label>
+                    <label for="email1" class="col-sm-3 text-end control-label col-form-label">{{__('message.address')}}</label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" id="address" name="address" placeholder="First Name Here" value="{{old('address',$data->address)}}">
                         @error('address')
@@ -81,7 +81,7 @@
                     </div>
                 </div> 
                 <div class="form-group row">
-                    <label class="col-sm-3 text-end control-label col-form-label" for="image">Upload Your Pic</label>
+                    <label class="col-sm-3 text-end control-label col-form-label" for="image">{{__('message.pic')}}</label>
                     <div class="col-sm-9">
                         <input type="file" id="update_image" name="image" value="{{old('image')}}" class="form-control" />
                     @error('image')
@@ -93,7 +93,7 @@
                 </div>
                 <div class="border-top">
                 <div class="card-body">
-                    <button type="submit" class="btn btn-primary" id="update" name="update">Update</button>
+                    <button type="submit" class="btn btn-primary" id="update" name="update">{{__('message.update')}}</button>
                 </div>
                 </div>
             </form>

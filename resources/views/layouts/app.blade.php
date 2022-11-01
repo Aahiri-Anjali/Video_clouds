@@ -101,7 +101,20 @@
                                     </form>
                                 </div>
                             </li>
-                        @endguest
+                        @endguest                       
+                          
+                          <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ Config::get('languages')[App::getLocale()] }}                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @foreach (Config::get('languages') as $lang => $language)
+                                    @if ($lang != App::getLocale())
+                                    <a class="dropdown-item" href="{{ route('lang.switch', $lang) }}"> {{$language}}</a>                                    @endif
+                                @endforeach                      
+                            </ul>
+                          </li>                       
+
+
                     </ul>
                 </div>
             </div>

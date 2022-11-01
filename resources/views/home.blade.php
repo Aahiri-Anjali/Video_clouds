@@ -61,7 +61,7 @@
     <div class="card">               
       <div class="card-body p-4 text-black">      
           <div class="d-flex justify-content-between align-items-center mb-4">
-            <p class="lead fw-normal mb-0"><i class="fa-solid fa-video"></i>  <strong>All Videos CategoryWise</strong></p>
+            <p class="lead fw-normal mb-0"><i class="fa-solid fa-video"></i>  <strong>{{__('message.all')}}</strong></p>
           </div>
         <div class="row g-2">
           @foreach($latestcategories as $key => $category)

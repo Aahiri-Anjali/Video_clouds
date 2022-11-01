@@ -15,7 +15,7 @@
   \************************************/
 /***/ (() => {
 
-eval("alert('this is laravelmix alert');//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJhbGVydCJdLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9yZXNvdXJjZXMvanMvbGFyYXZlbG1peC5qcz8xODQ0Il0sInNvdXJjZXNDb250ZW50IjpbImFsZXJ0KCd0aGlzIGlzIGxhcmF2ZWxtaXggYWxlcnQnKTsiXSwibWFwcGluZ3MiOiJBQUFBQSxLQUFLLENBQUMsMEJBQUQsQ0FBTCIsImZpbGUiOiIuL3Jlc291cmNlcy9qcy9sYXJhdmVsbWl4LmpzLmpzIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./resources/js/laravelmix.js\n");
+eval("alert('this is laravelmix alert');//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJhbGVydCJdLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9yZXNvdXJjZXMvanMvbGFyYXZlbG1peC5qcz8xODQ0Il0sInNvdXJjZXNDb250ZW50IjpbImFsZXJ0KCd0aGlzIGlzIGxhcmF2ZWxtaXggYWxlcnQnKTtcclxuIl0sIm1hcHBpbmdzIjoiQUFBQUEsS0FBSyxDQUFDLDBCQUFELENBQUwiLCJmaWxlIjoiLi9yZXNvdXJjZXMvanMvbGFyYXZlbG1peC5qcy5qcyIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./resources/js/laravelmix.js\n");
 
 /***/ }),
 

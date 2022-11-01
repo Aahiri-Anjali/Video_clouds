@@ -19,10 +19,10 @@
                     <div class="card mb-4">
                       <div class="card-body">
                         <div class="row">
-                            <center><b><h3>Video Details</h3></b></center>
+                            <center><b><h3>{{__('message.details')}}</h3></b></center>
                             <br>
                           <div class="col-sm-3">
-                            <p class="mb-0">Video Title <i class="fa-brands fa-cuttlefish"></i></p>
+                            <p class="mb-0">{{__('message.title')}}<i class="fa-brands fa-cuttlefish"></i></p>
                           </div>
                           <div class="col-sm-9">
                             <p class="text-muted mb-0">{{$lastvideo->title}}</p>
@@ -31,7 +31,7 @@
                         <hr>                    
                         <div class="row">
                           <div class="col-sm-3">
-                            <p class="mb-0">Publish Date <i class="fa-solid fa-calendar-days"></i></p>
+                            <p class="mb-0">{{__('message.date')}} <i class="fa-solid fa-calendar-days"></i></p>
                           </div>
                           <div class="col-sm-9">
                             <p class="text-muted mb-0">{{$lastvideo->published_at}}</p>
@@ -40,7 +40,7 @@
                         <hr>
                         <div class="row">
                           <div class="col-sm-3">
-                            <p class="mb-0">Video Link   <i class="fa-solid fa-link"></i></p>
+                            <p class="mb-0">{{__('message.link')}}   <i class="fa-solid fa-link"></i></p>
                           </div>
                           <div class="col-sm-9">
                             <p class="text-muted mb-0">{{$lastvideo->link}}</p>
@@ -49,7 +49,7 @@
                         <hr>
                         <div class="row">
                             <div class="col-sm-3">
-                              <p class="mb-0">Description <i class="fa-solid fa-audio-description"></i></p>
+                              <p class="mb-0">{{__('message.description')}} <i class="fa-solid fa-audio-description"></i></p>
                             </div>
                             <div class="col-sm-9">
                               <p class="text-muted mb-0">{{$lastvideo->description}}</p>
@@ -58,7 +58,7 @@
                           <hr>
                           <div class="row">
                             <div class="col-sm-3">
-                              <p class="mb-0">Video Hashtag <i class="fa-solid fa-hashtag"></i></p>
+                              <p class="mb-0">{{__('message.hashtags')}} <i class="fa-solid fa-hashtag"></i></p>
                             </div>
                             <div class="col-sm-9">
                               <p class="text-muted mb-0">{{$lastvideo->hashtags}}</p>
@@ -71,7 +71,7 @@
         </div>
 
             <div class="col-lg-5">
-              <h3> Related Videos</h3>
+              <h3> {{__('message.relate')}}</h3>
                 @foreach($videos as $video)
                 <a href="{{route('videoDetails',['id'=>$video->id])}}"><video height="300" width="500" controls><source src="{{$video->video}}" type="video/mp4" /></video></a>  
                   <div class="card last_v">

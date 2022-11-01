@@ -5,7 +5,7 @@
     @csrf
     <div class="card-body">
       <div class="form-group">
-        <label for="exampleInputEmail1">Current Password</label>
+        <label for="exampleInputEmail1">{{__('message.cpass')}}</label>
         <input type="password" class="form-control" id="currentpassword" name="currentpassword" placeholder="Enter Current Password" value="{{old('currentpassword')}}">
       </div> 
       @if ($errors->has('currentpassword'))
@@ -15,7 +15,7 @@
      @endif
 
       <div class="form-group">
-        <label for="exampleInputPassword1">New Password</label>
+        <label for="exampleInputPassword1">{{__('message.npass')}}</label>
         <input type="password" class="form-control" id="newpassword" name="newpassword" placeholder="Enter New Password" value="{{old('newpassword')}}">
       </div>
       @error('newpassword')
@@ -23,7 +23,7 @@
       @enderror
 
        <div class="form-group">
-        <label for="exampleInputPassword1">Confirm Password</label>
+        <label for="exampleInputPassword1">{{__('message.cnpass')}}</label>
         <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Enter Confirm Password" value="{{old('confirmpassword')}}">
       </div>
       @error('confirmpassword')
@@ -31,7 +31,7 @@
       @enderror
 
     <div class="card-footer">
-      <button type="submit" id="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" id="submit" class="btn btn-primary">{{__('message.submit')}}</button>
     </div>
 </form>
 

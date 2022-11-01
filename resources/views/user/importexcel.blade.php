@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <br><br><br>
-    <h2>Upload Excel File</h2>
+    <h2>{{__('message.upload')}}</h2>
     <br><br><br>
     <div class="main-body">
         <div class="row">
@@ -26,7 +26,9 @@
                                   <span class="text-danger">{{$message}}</span>
                               @enderror
                               <br>
-                              <button class="btn btn-primary">Import</button>
+                              @php $i = 0 @endphp
+                        <button class="btn btn-primary">{{__('message.import-button',['message'=>$i])}}
+                        </button>
                               {{-- <a href="{{route('export')}}">Export</a> --}}
                         </form>
                     </div>
@@ -35,5 +37,7 @@
         </div>
     </div>
 </div>
-
 @endsection
+
+
+ 
