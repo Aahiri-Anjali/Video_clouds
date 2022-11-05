@@ -21,6 +21,7 @@
         "sass-loader": "^11.0.1"
     },
     "dependencies": {
-        "flag-icon-css": "^4.1.7"
+        "flag-icon-css": "^4.1.7",
+        "select2": "^4.1.0-rc.0"
     }
 }

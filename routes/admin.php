@@ -35,6 +35,7 @@ Route::group(['middleware' => 'auth:admin'],function(){
     Route::get('/video/trashed/record','VideoController@videoTrashed')->name('videoTrashed');
     Route::get('/video/restore/record/{id}','VideoController@videoRestore')->name('videoRestore');
     Route::get('/video/delete/record/{id}','VideoController@videoDelete')->name('videoDelete');
+    Route::get('/video/title/search','VideoController@titleSearch')->name('titleSearch');
     Route::post('/image-icon',[ImageController::class,'imageDelete'])->name('imageDelete');
 });
 

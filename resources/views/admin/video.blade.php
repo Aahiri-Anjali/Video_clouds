@@ -2,6 +2,8 @@
 
 @push('link')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+{{-- <link href="{{Config::get('app.url')}}/node_modules/select2/dist/css/select2.min.css" rel="stylesheet" /> --}}
 @endpush
 
 @section('content')
@@ -141,20 +143,42 @@
 <div class="container">
 
     <table class="table table-border relod">
-        <form role="form" method="POST" name="search_form" id="search_form">
-            <div class="col-5">
-                <label class="form-label">Date Range</label>
-                <div class="input-group date" id="datepicker">
-                    <input type="text" id="daterange" name="daterange" class="form-control" />
-                <span class="input-group-append">
-                    <span class="input-group-text bg-light d-block">
-                    <i class="fa fa-calendar"></i>
+        <div class="row">
+            <form role="form" method="POST" name="search_form" id="search_form">
+                <div class="col-5">
+                    <label class="form-label">Date Range</label>
+                    <div class="input-group date" id="datepicker">
+                        <input type="text" id="daterange" name="daterange" class="form-control" />
+                    <span class="input-group-append">
+                        <span class="input-group-text bg-light d-block">
+                        <i class="fa fa-calendar"></i>
+                        </span>
                     </span>
-                </span>
+                    </div>
+                </div>
+            </form>
+            <div class="col-5">
+                <label class="form-label"> Title </label>
+                <div class="input-group date">
+                    <select class="form-control" id="title-select">
+                    </select>
+                </div>
+            </div>   
+            <div class="col-2">
+                <label></label>
+                <div class="input-group date">
+                    <button class="btn btn-primary" id="title_search">Search</button>&nbsp;
+                    <button class="btn btn-secondary" id="clear">clear</button>
+
                 </div>
             </div>
-        </form>
-            
+            <div class="col-2">
+                <div class="input-group date">
+                </div>
+            </div>
+      
+        </div>
+
             <tbody>
                 {!! $dataTable->table() !!}
             </tbody>
@@ -166,7 +190,8 @@
 @push('js')
 {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>   --}}
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+{{-- <script src="{{Config::get('app.url')}}/node_modules/select2/dist/js/select2.min.js"></script>   --}}
    
 {!! $dataTable->scripts() !!}
 <script>
@@ -203,15 +228,52 @@
                     console.log("table draw called")
                     window.LaravelDataTables['videodatatable-table'].draw();
                 }, 500);                                                
-            });
-
-            $('#videodatatable-table').on('preXhr.dt', function ( e, settings, data ) {
-                data.daterange = $('#daterange').val(); 
-                console.log(data.daterange);                       
-            });
+            });        
            
         });
-        
+
+        $('#videodatatable-table').on('preXhr.dt', function ( e, settings, data ) {
+            data.daterange = $('#daterange').val(); 
+            data.title_val = $('#title-select').val();
+            console.log(data.title_val);
+        });
+
+        $(function() {
+            $('#title-select').select2({
+                placeholder: 'Search by title..',
+                ajax:{
+                    url:"{{route('admin.titleSearch')}}",
+                    dataType:"json",
+                    processResults:function(data)
+                    {
+                        return{
+                            results: $.map(data,function(item){
+                                return {
+                                    text:item.title,
+                                    id:item.title,
+                                }
+                            })
+                        };
+                    },
+                    cache : true,                  
+                },
+            });
+
+            $('#title_search').on('click',function(){                   
+                setTimeout(function() {
+                        window.LaravelDataTables['videodatatable-table'].draw();
+                    }, 500);    
+            });
+
+            $('#clear').on('click',function(){
+                $('#daterange').val('');
+                $('#title-select').val('');
+                $('.select2-selection__rendered').text('');
+                window.LaravelDataTables['videodatatable-table'].draw();
+            });
+        });
+
+
         $('#video_close').click(function(){
             $('#video_modal').hide();
         });

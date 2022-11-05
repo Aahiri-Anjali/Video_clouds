@@ -47,7 +47,11 @@ class VideoDataTable extends DataTable
         {
             $date = explode(' - ',$request->daterange);          
             $model = $model->whereBetween('published_at',[$date[0],$date[1]]);          
-        }      
+        }  
+        if($request->title_val != '')
+        {
+            $model = $model->where('title',$request->title_val);
+        }    
         return $model->with('category')->newQuery();
      }
 

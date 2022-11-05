@@ -324,6 +324,17 @@ class VideoController extends Controller
             $video->forceDelete();  
         }  
     }
+
+    public function titleSearch(Request $request)
+    {
+        if ($request->has('q')) {
+            $search = $request->q;
+            $video = Video::select("id", "title")
+                ->where('title', 'LIKE', "%$search%")
+                ->get();
+            return response()->json($video);
+        }
+    }
 }
 
 

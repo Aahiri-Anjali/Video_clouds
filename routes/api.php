@@ -29,22 +29,22 @@ use Illuminate\Support\Facades\Auth;
 
 //users Route
 // Auth::routes();
-// Route::post('/userlogin',[ApiUserController::class,'userlogin']);
+Route::post('/userlogin',[ApiUserController::class,'userloginApi']);
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
-// Route::get('/userdetail',[ApiUserController::class,'userInfo'])->name('userInfo');
+Route::get('/userdetail',[ApiUserController::class,'userInfoApi'])->name('userInfoApi');
 
-// Route::post('/userdetail',[ApiUserController::class,'userInfoUpdate'])->name('userInfoUpdate');
-// Route::post('/changepassword',[ApiUserController::class,'submitChangePassword'])->name('submitChangePassword');
+Route::post('/userdetail',[ApiUserController::class,'userInfoUpdateApi'])->name('userInfoUpdateApi');
+Route::post('/changepassword',[ApiUserController::class,'submitChangePasswordApi'])->name('submitChangePasswordApi');
 
-// Route::get('/categoryVideo/{id}',[ApiUserController::class,'categoryWiseVideo'])->name('categoryWiseVideo');
-// Route::get('/videodetails/{id}',[ApiUserController::class,'videoDetails'])->name('videoDetails');
-// Route::post('/comments',[ApiUserController::class,'comments'])->name('comments');
-// Route::get('/commentsall',[ApiUserController::class,'showComments'])->name('showComments');
-// Route::post('/like',[ApiUserController::class,'like'])->name('like');
-// Route::post('/dislike',[ApiUserController::class,'dislike'])->name('dislike');
-// Route::post('/countlikes',[ApiUserController::class,'countLikes'])->name('countLikes');
-// Route::post('/countdislikes',[ApiUserController::class,'countDislikes'])->name('countDislikes');
-// Route::post('/removethumbsup',[ApiUserController::class,'removeLike'])->name('removeLike');
-// Route::post('/updatecomment',[ApiUserController::class,'updateComment'])->name('updateComment');
+Route::get('/categoryVideo/{id}',[ApiUserController::class,'categoryWiseVideoApi'])->name('categoryWiseVideoApi');
+Route::get('/videodetails/{id}',[ApiUserController::class,'videoDetailsApi'])->name('videoDetailsApi');
+Route::post('/comments',[ApiUserController::class,'commentsApi'])->name('commentsApi');
+Route::get('/commentsall',[ApiUserController::class,'showCommentsApi'])->name('showCommentsApi');
+Route::post('/like',[ApiUserController::class,'likeApi'])->name('likeApi');
+Route::post('/dislike',[ApiUserController::class,'dislikeApi'])->name('dislikeApi');
+Route::post('/countlikes',[ApiUserController::class,'countLikesApi'])->name('countLikesApi');
+Route::post('/countdislikes',[ApiUserController::class,'countDislikesApi'])->name('countDislikesApi');
+Route::post('/removethumbsup',[ApiUserController::class,'removeLikeApi'])->name('removeLikeApi');
+Route::post('/updatecomment',[ApiUserController::class,'updateCommentApi'])->name('updateCommentApi');
 
 

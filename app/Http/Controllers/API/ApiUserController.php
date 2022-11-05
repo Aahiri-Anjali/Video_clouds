@@ -80,7 +80,7 @@ class ApiUserController extends Controller
     //     return response()->json(['data'=>$user]);    
     // }
 
-    public function userlogin(Request $request)
+    public function userloginApi(Request $request)
     {
         $validate = Validator::make($request->all(),[
             'email'=>'required|email|exists:users,email','password'=>'required|min:8'
@@ -108,14 +108,14 @@ class ApiUserController extends Controller
         return response()->json(['data'=>$user]);    
     }
 
-    public function userInfo()
+    public function userInfoApi()
     {
-       $data = $this->userRepository->getUserinfo();
+       $data = $this->userRepository->getUserinfoApi();
        $categories = Category::all();
         return response()->json(['data'=>$data,'category'=>$categories]);        
     }
 
-    public function userInfoUpdate(Request $request)
+    public function userInfoUpdateApi(Request $request)
     {
         // dd($request->all());
         $validate = Validator::make($request->all(),['first_name'=>'required',
@@ -158,7 +158,7 @@ class ApiUserController extends Controller
 
     }
 
-    public function submitChangePassword(Request $request)
+    public function submitChangePasswordApi(Request $request)
     {
         $validate = Validator::make($request->all(),['currentpassword' => 'required|min:8',
                                                     'newpassword' => 'required|min:8',
@@ -189,25 +189,25 @@ class ApiUserController extends Controller
         }       
     }
 
-    public function categoryWiseVideo($id)
+    public function categoryWiseVideoApi($id)
     {
-        $data = $this->userRepository->getUserinfo();
+        $data = $this->userRepository->getUserinfoApi();
         $categories = Category::all();
         $videos = $this->userRepository->getCategoryWiseVideo($id);
         $lastvideo = $this->userRepository->getLastVideo($id);   
         return response()->json(['data'=>[$data,$categories,$videos,$lastvideo]]);
     }
 
-    public function videoDetails($id)
+    public function videoDetailsApi($id)
     {
-        $data = $this->userRepository->getUserinfo();
+        $data = $this->userRepository->getUserinfoApi();
         $categories = Category::all();
         $like = Like::where('video_id',$id)->where('user_id',$data->id)->first();
         $video = $this->userRepository->getvideoDetails($id);
         return response()->json(['data'=>[$data,$categories,$like,$video]]);
     }
 
-    public function comments(Request $request)
+    public function commentsApi(Request $request)
     {
         $validate = Validator::make($request->all(),[
             'video_id'=>'required',
@@ -230,7 +230,7 @@ class ApiUserController extends Controller
         }
     }
 
-    public function showComments(Request $request)
+    public function showCommentsApi(Request $request)
     {
         $validate = Validator::make($request->all(),[
             'video_id'=>'required|numeric',
@@ -249,7 +249,7 @@ class ApiUserController extends Controller
         return response()->json(['data'=>[$comments,$usercomments,$loggedid]]);
     }
 
-    public function like(Request $request)
+    public function likeApi(Request $request)
     {
         $validate = Validator::make($request->all(),[
             'video_id'=>'required|numeric',
@@ -270,7 +270,7 @@ class ApiUserController extends Controller
         }
     }
 
-    public function dislike(Request $request)
+    public function dislikeApi(Request $request)
     {
         $validate = Validator::make($request->all(),[
             'video_id'=>'required|numeric',
@@ -291,7 +291,7 @@ class ApiUserController extends Controller
         }
     }
 
-    public function countLikes(Request $request)
+    public function countLikesApi(Request $request)
     {
         $validate = Validator::make($request->all(),[
             'video_id'=>'required|numeric',
@@ -307,7 +307,7 @@ class ApiUserController extends Controller
         return response()->json(['status'=>200,'data'=>$countlikes]);
     }
 
-    public function countDislikes(Request $request)
+    public function countDislikesApi(Request $request)
     {
         $validate = Validator::make($request->all(),[
             'video_id'=>'required|numeric',
@@ -323,7 +323,7 @@ class ApiUserController extends Controller
         return response()->json(['status'=>200,'data'=>$countdislikes]);
     }
 
-    public function removeLike(Request $request)
+    public function removeLikeApi(Request $request)
     {
         $validate = Validator::make($request->all(),[
             'video_id'=>'required|numeric',
@@ -336,21 +336,27 @@ class ApiUserController extends Controller
         return response()->json(['errors'=>$validate->errors()]);
         }
 
-        if($request->video_status == "like")
+        if(!is_null($request->video_id) && !is_null($request->user_id))
         {
-            $removelike = Like::where('video_id',$request->video_id)->where('user_id',$request->user_id)->where('video_status','like')->first();
-            $deletelike = $removelike->delete();
+            if($request->video_status == "like")
+            {
+                $removelike = Like::where('video_id',$request->video_id)->where('user_id',$request->user_id)->where('video_status','like')->first();
+                $deletelike = $removelike->delete();
+            }
+            if($request->video_status == "dislike")
+            {
+                $removedislike = Like::where('video_id',$request->video_id)->where('user_id',$request->user_id)->where('video_status','dislike')->first();
+                $deletedislike = $removedislike->delete();
+            }
+            return response()->json(['status'=>200,'data'=>'removed']);
         }
-        if($request->video_status == "dislike")
+        else
         {
-            $removedislike = Like::where('video_id',$request->video_id)->where('user_id',$request->user_id)->where('video_status','dislike')->first();
-            $deletedislike = $removedislike->delete();
-        }
-        
-        return response()->json(['status'=>200,'data'=>'removed']);
+            return response()->json(['data'=>'data is null']);
+        }   
     }
 
-    public function updateComment(Request $request)
+    public function updateCommentApi(Request $request)
     {
         $validate = Validator::make($request->all(),[
             'comment_id'=>'required|numeric',
