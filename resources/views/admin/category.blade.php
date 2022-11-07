@@ -106,7 +106,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        $("#myeditModal, #myModal").on("hidden.bs.modal", function() {
+        $("#myeditModal, #myModal").on("hide.bs.modal", function() {
             $("#myeditModal form")[0].reset();
             $("#myModal form")[0].reset();
             $('span').html('');
@@ -181,13 +181,11 @@
         }
 
         $(document).on('click', '.editbtn', function(e) {
-            // console.log('clicked');
             e.preventDefault();
             $('#myeditModal').modal('show');
             var id = $(this).val();
             var url = "{{route('admin.categoryEdit',['id'=>':id'])}}";
             url = url.replace(':id', id);
-            // console.log(id);
             $.ajax({
                 type: "get",
                 url: url,
@@ -195,7 +193,6 @@
                 success: function(response) {
                     console.log('success');
                     if (response.status == true) {
-                        console.log('in true');
                         $('#editid').val(id);
                         $('#editname').val(response.data.name);
                     }
@@ -243,7 +240,6 @@
             var id = $(this).val();
             var url = "{{route('admin.categoryDelete',['id'=>':id'])}}";
             url = url.replace(':id', id);
-
             $.ajax({
                 url: url,
                 dataType: "json",
@@ -266,14 +262,12 @@
         $(document).on('click', '#status', function(e) {
             e.preventDefault();
             var id = $(this).val();
-            var status = $(this).text();
             $.ajax({
                 url: "/Admin/category-status",
                 dataType: "json",
                 type: "post",
                 data: {
                     id: id,
-                    status: status
                 },
                 success: function(response) {
                     if (response.status == 200) {

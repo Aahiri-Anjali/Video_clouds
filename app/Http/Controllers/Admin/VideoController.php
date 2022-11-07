@@ -39,7 +39,6 @@ class VideoController extends Controller
      */
     public function create(VideoDataTable $dataTable)
     {
-        // dd($dataTable);
         $categories = Category::where('status', '1')->get();
         return $dataTable->render('admin.video', compact('categories')); 
     }
@@ -52,11 +51,9 @@ class VideoController extends Controller
      */
     public function store(VideoRequest $request)
     {
-        // dd($request->all());
        if($request->video_id){
             $exist_video = Video::where('id', $request->video_id)->first();
             $upload_type = $exist_video->upload_type;
-            // dd($upload_type);
             if($request->file('video'))
             {
                 File::delete(public_path() . '/upload/'. $exist_video->getRawOriginal('video'));           
@@ -137,7 +134,6 @@ class VideoController extends Controller
             'status'=>'1',
             'user_type'=>$request['user_type'],
             'link'=>Str::random(11),
-            // 'slug'=>Str::slug($request['title'], "-"),
         ]);
 
         
@@ -198,16 +194,13 @@ class VideoController extends Controller
      */
     public function update(VideoUpdateRequest $request, $id)
     {
-        $request->all();
-
         $video = Video::find($id);
         if($request->hasfile('video'))
         {
             $filename = time() . $request->file('video')->getClientOriginalName();
             $request->file('video')->move(public_path() . '/upload/', $filename);
             $video->video=$filename;
-            $video->save();
-            
+            $video->save();           
         }       
         if(isset($id))
         {
@@ -251,11 +244,8 @@ class VideoController extends Controller
 
     public function videoModal(Request $request)
     {
-        // $video = video::find($request->id);
         $video = $this->getVideoId($request->id); 
-        // dd($video);
         $images = Image::where('video_id',$request->id)->get();
-        // dd($images);
         if(isset($video) && !empty($video))
         {          
             return response()->json(['status'=>200,'data'=>$video, 'images'=>$images]);
@@ -265,8 +255,6 @@ class VideoController extends Controller
     public function statusChange(Request $request)
     {
         $id = Video::where('id',$request->id)->first();
-        // dd($id);
-        // dd($id->status);
         if(isset($id) && !empty($id))
         {
             if($id->status == '0')

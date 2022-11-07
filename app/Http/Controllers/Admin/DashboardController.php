@@ -13,7 +13,6 @@ class DashboardController extends Controller
     {
         $admin =Auth::guard('admin')->user();
         $data=compact('admin');
-        // dd($data);
         return view('admin.dashboard')->with($data);
     }
 }

@@ -305,7 +305,6 @@
         });
 
         $(document).on('click','#add_video',function(e){
-            console.log('in add');
             e.preventDefault();
             var id = $('#editid').val();
             var upload_type = $('input[type="radio"]:checked').val();
@@ -477,7 +476,6 @@
         $(document).on('click','.icon',function(){
             var id = $(this).attr('id');
             var video_id = $(this).attr('video-id');
-            console.log(video_id);
             $.ajax({
                 url:"{{route('admin.imageDelete')}}",
                 dataType:"json",
@@ -487,10 +485,8 @@
                 {
                     if(response.status==200)
                     {
-                        // window.LaravelDataTables['videodatatable-table'].draw(); 
                         console.log('in success');
                         var images = response.images;
-                         console.log(images);
                         $(".edit_video_div").html('');
                         $.each(images,function(key,value)
                         {

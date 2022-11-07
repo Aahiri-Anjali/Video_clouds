@@ -24,15 +24,15 @@ class FacebookController extends Controller
         }
         else
         {
-                $newUser = User::create([
-                    'first_name'=>$user->name,
-                    'email' => $user->email,
-                    'social_id'=> $user->id,
-                    'social_type'=> 'facebook',
-                    'avatar' => $user->avatar,
-                ]);  
-                Auth::login($newUser);    
-                return redirect('/home');
-            }
+            $newUser = User::create([
+                'first_name'=>$user->name,
+                'email' => $user->email,
+                'social_id'=> $user->id,
+                'social_type'=> 'facebook',
+                'avatar' => $user->avatar,
+            ]);  
+            Auth::login($newUser);    
+            return redirect('/home');
+        }
     }
 }

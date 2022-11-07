@@ -103,8 +103,6 @@ class UserController extends Controller
         $categories = Category::all();
         $like = Like::where('video_id',$id)->where('user_id',$data->id)->first();
         $video = $this->userRepository->getvideoDetails($id);
-        // $category_id = $video->category_id;
-        // $category = Category::find('id',$category_id);
         return view('user.videodetails',compact('video','data','categories','like'));
     }
 

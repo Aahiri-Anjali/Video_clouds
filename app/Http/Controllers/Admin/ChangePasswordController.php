@@ -29,27 +29,17 @@ class ChangePasswordController extends Controller
 
         if($validator->fails())
         {
-            return response()->json([
-                'status'=>false,
-                'errors' => $validator->errors(),
-                'admin'=>$adminpass,
-            ]);
+            return response()->json(['status'=>false,'errors' => $validator->errors()]);
         }
         if(Hash::check($currentpass,$adminpass))
         {
             $update = Auth::guard('admin')->user()->update([
                 'password'=>Hash::make($req['newpassword']),
             ]);
-            return response()->json([
-                'status'=>true,
-                'data'=>"You have Successfully changed your password",
-            ]);
+            return response()->json(['status'=>true,'data'=>"You have Successfully changed your password",]);
         }
         else{
-            return response()->json([
-                'status'=>'false',
-                'error'=>"Curren Password is Incurrect",
-            ]);
+            return response()->json(['status'=>'false','error'=>"Curren Password is Incurrect",]);
         }
 
     }

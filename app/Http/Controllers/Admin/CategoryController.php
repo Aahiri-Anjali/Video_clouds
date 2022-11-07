@@ -21,10 +21,7 @@ class CategoryController extends Controller
         $validator = Validator::make($req->all(),['name'=>'required|alpha|unique:categories,name']);
         if($validator->fails())
         {
-           $return =[
-                'status'=>false,
-                'errors'=>$validator->errors(),
-            ];
+           $return =['status'=>false,'errors'=>$validator->errors(),];
         }
         else {
             $category= Category::insert([
@@ -33,10 +30,7 @@ class CategoryController extends Controller
             ]);
             if($category)
             {
-                $return = [
-                    'status'=>true,
-                    'data'=>'inserted Successfull',
-                ];
+                $return = ['status'=>true,'data'=>'inserted Successfull',];
             }
         }
         return response()->json($return);
@@ -45,19 +39,13 @@ class CategoryController extends Controller
     public function categoryData()
     {
         $category = Category::all();
-        return response()->json([
-            'status'=>true,
-            'data'=>$category,
-        ]);
+        return response()->json(['status'=>true,'data'=>$category,]);
     }
 
     public function categoryEdit($id)
     {
         $category = Category::find($id);
-        return response()->json([
-            'status'=>true,
-            'data'=>$category,
-        ]);
+        return response()->json(['status'=>true,'data'=>$category,]);
     }
 
     public function categoryUpdate(Request $req,$id)
@@ -65,21 +53,13 @@ class CategoryController extends Controller
         $validator =Validator::make($req->all(),['name'=>'required|alpha|unique:categories,name']);
         if($validator->fails())
         {
-            $return = [
-                'status'=>false,
-                'errors'=>$validator->errors(),
-            ];
+            $return = ['status'=>false,'errors'=>$validator->errors(),];
         }
         else {
-            $category = Category::find($id)->update([
-                'name'=>$req['name'],
-            ]);
+            $category = Category::find($id)->update(['name'=>$req['name'],]);
             if($category)
             {
-                $return = [
-                    'status'=>true,
-                    'data'=>'Category Updated',
-                ];
+                $return = ['status'=>true,'data'=>'Category Updated',];
             }
         }
         return response()->json($return);
@@ -91,22 +71,18 @@ class CategoryController extends Controller
         $category = Category::find($id)->delete();
         if($category)
         {
-             return response()->json([
-                    'status'=>true,
-                    'data'=>'Category Deleted',
-                ]);
+            return response()->json(['status'=>true,'data'=>'Category Deleted',]);
         }
     }
 
     
-    public function categoryStatus(Request $req)
+    public function categoryStatus(Request $request)
     {
-        Log ::info($req->all());
-        $category_id = Category::find($req->id);
-        $video = Video::where('category_id', $req->id)->get();   
+        $category_id = Category::find($request->id);
+        $video = Video::where('category_id', $request->id)->get();   
         if(isset($category_id) && !empty($category_id))
         {
-            if($req->status=="Active")
+            if($category_id->status=='1')
             {
                  $category_id->status='0';
                  foreach($video as $v)
@@ -120,7 +96,7 @@ class CategoryController extends Controller
                 foreach($video as $v)
                  {
                     $v->status = '1';
-                     $v->update();
+                    $v->update();
                  }  
             }
              $category_id->update();

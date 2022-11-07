@@ -72,7 +72,7 @@ class ForgetPasswordController extends Controller
                  Admin::where('email',$session)->update([
                     'password'=>$password,
                 ]);
-                 DB::table('password_reset')->where('email',$session)->delete();
+                DB::table('password_reset')->where('email',$session)->delete();
                 $req->session()->flash('email');
             }
             else

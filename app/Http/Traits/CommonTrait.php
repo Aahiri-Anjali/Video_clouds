@@ -7,6 +7,6 @@ trait CommonTrait
 {
      public function getVideoId($id)
      {
-         return Video::where('id',$id)->first();
+        return Video::where('id',$id)->first();
      }
 }
