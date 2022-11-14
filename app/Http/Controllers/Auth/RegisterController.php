@@ -62,7 +62,7 @@ class RegisterController extends Controller
             'state' => ['required', 'alpha'],
             'city' => ['required', 'alpha'],
             'address' => ['required'],
-            'mobile' => ['required', 'numeric', 'min:11'],
+            'mobile' => ['required', 'numeric', 'digits:10', 'starts_with:6,7,8,9'],
         ]);
 
     }
