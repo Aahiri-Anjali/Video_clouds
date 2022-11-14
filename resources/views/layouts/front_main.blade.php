@@ -9,13 +9,9 @@
     <meta name="description" content="Matrix Admin Lite Free Version is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <style>
-      /* .videoclouds{
-        font-color:white;
-      } */
-      </style>
     <title>Video Clouds</title>
     <!-- Favicon icon -->
+   
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('front_assets/assets/images/favicon.png')}}">
     <!-- Custom CSS -->
     <link href="{{asset('front_assets/assets/libs/flot/css/float-chart.css')}}" rel="stylesheet">
@@ -26,7 +22,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/css/toastr.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet">
-    @stack('link')
+     @stack('link')
   <style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;padding: 5px;border: 1px solid white;z-index: 10000;}.jqsfield { color: white;font: 10px arial, san serif;text-align: left;}</style></head>
   <body>
     <!-- ============================================================== -->
@@ -116,6 +112,16 @@
               <li class="nav-item d-none d-lg-block">
                 <a class="nav-link waves-effect waves-light" href="{{route('laravelform.show')}}">
                   <span class="d-none d-md-block">  {{__('message.laravel')}}</span>
+                </a>
+              </li>
+              <li class="nav-item d-none d-lg-block">
+                <a class="nav-link waves-effect waves-light" href="{{route('stripe.show')}}">
+                  <span class="d-none d-md-block"> Stripe Gateway </span>
+                </a>
+              </li>
+              <li class="nav-item d-none d-lg-block">
+                <a class="nav-link waves-effect waves-light" href="{{route('stripe.list')}}">
+                  <span class="d-none d-md-block"> Stripe Payment List </span>
                 </a>
               </li>
             

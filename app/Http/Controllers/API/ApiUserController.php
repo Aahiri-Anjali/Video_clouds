@@ -11,7 +11,7 @@ use  App\Models\User;
 use App\Models\Category;
 use App\Models\Like;
 use App\Models\Comment;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 use App\Interfaces\UserRepositoryInterface;
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\User\UserUpdateRequest;
@@ -25,6 +25,36 @@ class ApiUserController extends Controller
     public function __construct(UserRepositoryInterface $userRepository) 
     {
         $this->userRepository = $userRepository;
+    }
+
+    public function createStripe()
+    {
+        // echo "in";
+        $stripe = new \Stripe\StripeClient(
+            'sk_test_51M2obIILFiwzPDQAuZdBxGP92yGLo2j4RtpFZ7vgzUKMX9VZwnFEMQbebNH7DVtes0U4YCkBZ4KnSlYpZpekNqRI00gmRGAqCM'
+        );
+       
+        $customers = $stripe->customers->create([
+            'description' => 'My First Test Customer (created for API docs at https://www.stripe.com/docs/api)',
+        ]);
+         
+        $token = $stripe->tokens->create([
+            'card' => [
+                'number' => '4242424242424242',
+                'exp_month' => 11,
+                'exp_year' => 2023,
+                'cvc' => '314',
+            ],
+        ]);
+       
+        $customer_charge = $stripe->charges->create([
+                'amount' => 2000,
+                'currency' => 'usd',
+                'source' => $token->id,
+                'description' => 'My First Test Charge (created for API docs at https://www.stripe.com/docs/api)',
+        ]);
+        dd($customer_charge);
+        
     }
 
     public function register(Request $request)

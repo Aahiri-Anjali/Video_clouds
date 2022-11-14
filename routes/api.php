@@ -47,4 +47,7 @@ Route::post('/countdislikes',[ApiUserController::class,'countDislikesApi'])->nam
 Route::post('/removethumbsup',[ApiUserController::class,'removeLikeApi'])->name('removeLikeApi');
 Route::post('/updatecomment',[ApiUserController::class,'updateCommentApi'])->name('updateCommentApi');
 
+//for Stripe Gateway
+Route::post('/stripe',[ApiUserController::class,'createStripe']);
+
 

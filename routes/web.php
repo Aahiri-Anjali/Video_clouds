@@ -12,6 +12,7 @@ use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\GithubController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\StripeController;
 
 
 /*
@@ -82,5 +83,10 @@ Route::get('callback/github', [GithubController::class, 'callbackFromGithub']);
 
 // Change Language
 // Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
-
 Route::get('lang/{lang}',[LanguageController::class,'switchLang'])->name('lang.switch');
+
+//Stripe Gateway
+Route::get('stripe',[StripeController::class,'stripeShow'])->name('stripe.show');
+Route::post('stripe',[StripeController::class,'stripeSubmit'])->name('stripe.submit');
+Route::get('/stripe/list',[StripeController::class,'stripeList'])->name('stripe.list');  
+Route::get('/stripe/refund/{charge_id}',[StripeController::class,'stripeRefund'])->name('stripe.refund');
