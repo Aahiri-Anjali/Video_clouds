@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->integer('country_code');
-            $table->integer('mobile');
+            $table->string('mobile');
             $table->string('country');
             $table->string('state');
             $table->string('city');

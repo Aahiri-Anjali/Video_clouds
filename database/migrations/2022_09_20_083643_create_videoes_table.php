@@ -17,7 +17,7 @@ class CreateVideoesTable extends Migration
             $table->id();
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete()->cascadeOnUpdate();
             $table->enum('user_type',[0,1])->comment('0=>admin,1=>user');
-            $table->foreignId('user_id')->index()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('user_id')->index()->constrained()->cascadeOnDelete()->cascadeOnUpdate()->nullable();
             $table->string('title');
             $table->string('video');
             $table->date('published_at');

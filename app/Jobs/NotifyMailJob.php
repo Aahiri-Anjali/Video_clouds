@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-
+use Illuminate\Support\Facades\Mail;
 // use Illuminate\Support\Facades\Mail;
 
 class NotifyMailJob implements ShouldQueue
@@ -38,6 +38,6 @@ class NotifyMailJob implements ShouldQueue
      */
     public function handle()
     {
-        \Mail::to($this->email)->send(new NotifyMail($this->name));
+        Mail::to($this->email)->send(new NotifyMail($this->name));
     }
 }
