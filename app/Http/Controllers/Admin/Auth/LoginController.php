@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
+use App\Events\Loggedin;
 
 
 
@@ -53,5 +54,12 @@ class LoginController extends Controller
     {
         return Auth::guard('admin');
     }
+
+    protected function authenticated(Request $request, $user)
+    {
+        // dd($user);
+        event(new Loggedin($user));
+    }
+
 
 }

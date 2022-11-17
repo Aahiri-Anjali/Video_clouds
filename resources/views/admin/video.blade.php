@@ -339,7 +339,7 @@
                         });
                         window.LaravelDataTables['videodatatable-table'].draw();                               
                     }
-                    if(response.status==422)
+                    if(response.status==422)  
                     {
                         console.log(response.data);
                         $('#type_error').text(response.data);

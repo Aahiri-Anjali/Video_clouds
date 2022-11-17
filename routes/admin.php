@@ -18,7 +18,7 @@ Route::get('/logout','LoginController@logout')->name('admin_logout');
 Route::group(['middleware' => 'auth:admin'],function(){
     Route::get('/dashboard',function()
     {
-        return view('admin.dashboard');
+        return view('admin.dashboard');  
     })->name('dashboard');
     Route::get('/changepassword',[ChangePasswordController::class,'viewChangepassword'])->name('viewchangepassword');
     Route::post('/changepassword',[ChangePasswordController::class,'changepassword'])->name('changepassword');

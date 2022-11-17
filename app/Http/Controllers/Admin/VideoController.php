@@ -104,7 +104,7 @@ class VideoController extends Controller
                 }       
             }
         } 
-        else 
+        else   
         {
             $upload = $exist_video->getRawOriginal('video');
         }
@@ -324,5 +324,6 @@ class VideoController extends Controller
         }
     }
 }
+
 
 

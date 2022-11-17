@@ -30,6 +30,7 @@ class GithubController extends Controller
                 $newUser = User::create(
                     [
                         'first_name'=>$user->name,
+                        'last_name'=>null,
                         'email' => $user->email,
                         'social_id'=> $user->id,
                         'social_type'=> 'github',

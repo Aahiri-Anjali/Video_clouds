@@ -13,6 +13,8 @@ use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\GithubController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\StripeController;
+use App\Http\Controllers\CronejobController;
+
 
 
 /*
@@ -90,3 +92,12 @@ Route::get('stripe',[StripeController::class,'stripeShow'])->name('stripe.show')
 Route::post('stripe',[StripeController::class,'stripeSubmit'])->name('stripe.submit');
 Route::get('/stripe/list',[StripeController::class,'stripeList'])->name('stripe.list');  
 Route::get('/stripe/refund/{charge_id}',[StripeController::class,'stripeRefund'])->name('stripe.refund');
+
+//crone-job
+Route::get('/cronjob',[CronejobController::class,'cronjobShow'])->name('cronjob.show');
+
+//Notification
+Route::get('/notification',[App\Http\Controllers\NotificationController::class,'notification']);
+
+//Notification with one signal
+Route::get('/notification/onesignal',[App\Http\Controllers\OnesignalNotificationController::class,'oneSignalNotification']);

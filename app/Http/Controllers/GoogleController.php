@@ -3,20 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Socialite;
-use Auth;
+use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
 class GoogleController extends Controller
 {
     public function redirectToGoogle()
     {
-        return socialite::driver('google')->redirect();
+        return Socialite::driver('google')->redirect(); 
     }
 
     public function callbackFromGoogle()
     {      
-        $user = socialite::driver('google')->stateless()->user();      
+        $user = Socialite::driver('google')->stateless()->user();      
         $finduser = User::where('social_id', $user->id)->first();
 
         if($finduser){ 

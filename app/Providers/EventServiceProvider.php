@@ -8,6 +8,9 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Illuminate\Support\Facades\Event;
 use App\Models\Video;
 use App\Observers\SlugObserver;
+use App\Events\Loggedin;
+use App\Listeners\LoginHistory;
+
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -19,6 +22,9 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        Loggedin::class => [    //event
+            LoginHistory::class, //listener
         ],
     ];
 
