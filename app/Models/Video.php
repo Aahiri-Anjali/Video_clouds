@@ -21,7 +21,9 @@ class Video extends Model
                             'description',
                              'hashtags',
                             'status',
-                            'slug',];
+                            'slug',
+                            'thambuli',
+                            ];
 
     // protected $casts =[
     //     'video' => 'array'

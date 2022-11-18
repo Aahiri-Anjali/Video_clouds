@@ -30,7 +30,8 @@ class VideoDataTable extends DataTable
                 return "<button type='button' value='".$videos->id."' class='btn btn-primary' id='edit' data-toggle='modal' data-target='#myModal'>Edit</button><button class='btn btn-danger' value='".$videos->id."' id='trash'>Trash</button>";
             })
             ->editColumn('video',static function ($videos){
-                return '<img id="img" src="'.asset("/upload/videoimg.webp").'" value-id="'.$videos->id.'" height="100px" width="100px">';
+                $video  =  $videos->upload_type=="upload_video" ? asset('/thumbs/'.$videos->thambuli): asset('/upload/videoimg.webp');
+                  return '<img id="img" src="'.$video.'"  value-id="'.$videos->id.'" height="100px" width="100px">'; 
             })
             ->rawColumns(['status', 'action','video']);
     }

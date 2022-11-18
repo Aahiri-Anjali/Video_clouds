@@ -182,6 +182,7 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+        Pawlox\VideoThumbnail\VideoThumbnailServiceProvider::class
 
     ],
 
@@ -241,6 +242,7 @@ return [
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'VideoThumbnail' => Pawlox\VideoThumbnail\Facade\VideoThumbnail::class
     ],
 
 ];

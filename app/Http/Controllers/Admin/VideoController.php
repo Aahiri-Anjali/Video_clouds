@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;  
 use  App\Models\Image;
 use App\Http\Traits\CommonTrait;
+use Pawlox\VideoThumbnail\Facade\VideoThumbnail;
+use Illuminate\Support\Facades\Log;
 // use Illuminate\Support\Facades\Input;
 
 
@@ -84,13 +86,16 @@ class VideoController extends Controller
        $filename ="";
        $upload = '';
        $extension = "";
+       $file_path = "";
+       $thumbnail_name ="";
+       $thumbs ="";
        $files =array();
         if($request->file('video'))
         {                     
             foreach($request->file('video') as $file)
             {
                 $filename = time() . $file->getClientOriginalName();
-                $file->move(public_path() . '/upload/', $filename); 
+                $file_path = $file->move(public_path() . '/upload/', $filename); 
                 $extension = $file->getClientOriginalExtension();
                 array_push($files, $filename);                                
             }  
@@ -102,6 +107,27 @@ class VideoController extends Controller
                 {
                     return response()->json(['status'=>422,'data'=>'Upload Valid images']);
                 }       
+            }
+            if($request['upload_type']== "upload_video")
+            {
+                try{
+                    $thumbnail_path = public_path()."/thumbs/";
+                    $thumbnail_name = time()."thumb.jpg";
+                    $thumbs = VideoThumbnail::createThumbnail(
+                        $file_path,
+                        $thumbnail_path,
+                        $thumbnail_name, 
+                        2, 
+                        1920, 
+                        1080
+                    );
+                    \Log::info('genarated');
+                }catch(throwable $t)
+                {
+                    \Log::error($t);
+                }
+                
+                // dd($thumbs);
             }
         } 
         else   
@@ -121,20 +147,21 @@ class VideoController extends Controller
             }
 
         }
-
-        $video = Video::updateOrCreate(
-            ['id' => $request->video_id],
-            ['title'=>$request['title'],
-            'upload_type'=>$request['upload_type'] ,
-            'video'=> !empty($upload) ? $upload : ($request['upload_type'] == 'upload_video' ? $filename : ''),
-            'hashtags'=>$request['hashtag'],
-            'description'=>$request['description'],
-            'category_id'=>$request['category_type'],
-            'published_at'=>$request['date'],
-            'status'=>'1',
-            'user_type'=>$request['user_type'],
-            'link'=>Str::random(11),
-        ]);
+     
+            $video = Video::updateOrCreate(
+                ['id' => $request->video_id],
+                ['title'=>$request['title'],
+                'upload_type'=>$request['upload_type'] ,
+                'video'=> !empty($upload) ? $upload : ($request['upload_type'] == 'upload_video' ? $filename : ''),
+                'hashtags'=>$request['hashtag'],
+                'description'=>$request['description'],
+                'category_id'=>$request['category_type'],
+                'published_at'=>$request['date'],
+                'status'=>'1',
+                'user_type'=>$request['user_type'],
+                'thambuli'=>$thumbnail_name ?? "",
+                'link'=>Str::random(11),
+            ]);
 
         
         if($video && $request->upload_type == "upload_image")
